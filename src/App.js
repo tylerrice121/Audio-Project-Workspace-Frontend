@@ -21,17 +21,27 @@ function App() {
 
   // projects helper functions
   const getProjects = async () => {
-    const response = await fetch(API_URL);
+    // get secure id token from firebase user
+    if(!user) return;
+
+    const token = await user.getIdToken();
+    const response = await fetch(API_URL, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    });
     const projects = await response.json();
     setProjects(projects)
 
   };
 
   const createProject = async (p) => {
+    const data = {...p, managedBy: user.uid}
     await fetch(API_URL, {
       method: 'POST', 
       headers: {'Content-type': 'Application/json'},
-      body: JSON.stringify(p)
+      body: JSON.stringify(data)
     })
     getProjects()
   }
@@ -41,7 +51,7 @@ function App() {
     // TODO: only get contacts after a user has signed in
     getProjects();
     return () => unsubscribe();
-  });
+  }, [user]);
 
 
   return (
