@@ -15,6 +15,20 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <Switch>
+        <Route exact path='/'>
+          <Home />
+        </Route>
+        <Route path='/login'>
+          <Login />
+        </Route>
+        <Route path='/signup'>
+          <Signup />
+        </Route>
+        <Route path='/dashboard'>
+          <Dashboard />
+        </Route>
+      </Switch>
       <Footer />
     </div>
   );
