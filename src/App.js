@@ -12,9 +12,17 @@ import {auth} from './services/firebase';
 import './App.css';
 
 function App() {
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => setUser(user));
+    return () => unsubscribe();
+  });
+
+
   return (
     <div className="App">
-      <Header />
+      <Header user={user}/>
       <Switch>
         <Route exact path='/'>
           <Home />
@@ -22,9 +30,9 @@ function App() {
         <Route path='/login'>
           <Login />
         </Route>
-        <Route path='/signup'>
-          <Signup />
-        </Route>
+        <Route path='/signup' render={() => (
+          user ? <Redirect to='/dashboard' /> : <Signup />
+        )} />
         <Route path='/dashboard'>
           <Dashboard />
         </Route>
