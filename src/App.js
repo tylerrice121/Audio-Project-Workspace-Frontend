@@ -14,8 +14,32 @@ import './App.css';
 function App() {
   const [user, setUser] = useState(null)
 
+  const [projects, setProjects] = useState([]);
+
+  // TODO: add heroku api url
+  const API_URL = 'http://localhost:3001/api/projects'
+
+  // projects helper functions
+  const getProjects = async () => {
+    const response = await fetch(API_URL);
+    const projects = await response.json();
+    setProjects(projects)
+
+  };
+
+  const createProject = async (p) => {
+    await fetch(API_URL, {
+      method: 'POST', 
+      headers: {'Content-type': 'Application/json'},
+      body: JSON.stringify(p)
+    })
+    getProjects()
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => setUser(user));
+    // TODO: only get contacts after a user has signed in
+    getProjects();
     return () => unsubscribe();
   });
 
@@ -34,7 +58,11 @@ function App() {
           user ? <Redirect to='/dashboard' /> : <Signup />
         )} />
         <Route path='/dashboard' render={() => (
-          user ? <Dashboard /> : <Redirect to='/'/>
+          user ? (
+          <Dashboard 
+          projects={projects} 
+          createProject={createProject}
+          />) : <Redirect to='/'/>
         )} />
       </Switch>
       <Footer />
