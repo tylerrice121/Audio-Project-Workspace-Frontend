@@ -1,11 +1,13 @@
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Dashboard = (props) => {
     const [formState, setFormState] = useState({
         title: "",
         img: "",
         managedBy: props.user.uid
+        
     })
 
     const handleChange = event => {
@@ -22,7 +24,8 @@ const Dashboard = (props) => {
         setFormState({
             title: "",
             img: "",
-            managedBy: props.user.uid
+            managedBy: props.user.uid,
+            _id: ""
         })
 
     }
@@ -48,10 +51,11 @@ const Dashboard = (props) => {
                 </form>
                 <div>
                     {
-                        props.projects.map(pr => (
+                        props.projects.map((pr, idx) => (
                             <div key={pr._id}>
-                                <h1>{pr.title}</h1>
-                                {/* <h1>{pr.img}</h1> */}
+                                <Link to={`/project/${pr._id}`} key={idx}>
+                                    <h1>{pr.title}</h1>
+                                </Link>
                             </div>
                         ))
                     }

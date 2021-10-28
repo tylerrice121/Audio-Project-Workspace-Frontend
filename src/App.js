@@ -76,6 +76,16 @@ function App() {
           user={user}
           />) : <Redirect to='/'/>
         )} />
+        <Route 
+          path='/project/:id'
+          render={(rp) => (
+            <Project 
+              {...rp}
+              projects={projects}
+            />
+
+          )}
+        />  
       </Switch>
       <Footer />
     </div>
