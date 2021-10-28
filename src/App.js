@@ -27,15 +27,15 @@ function App() {
         <Route exact path='/'>
           <Home />
         </Route>
-        <Route path='/login'>
-          <Login />
-        </Route>
+        <Route path='/login' render={() => (
+          user ? <Redirect to='/dashboard' /> : <Login />
+        )} />
         <Route path='/signup' render={() => (
           user ? <Redirect to='/dashboard' /> : <Signup />
         )} />
-        <Route path='/dashboard'>
-          <Dashboard />
-        </Route>
+        <Route path='/dashboard' render={() => (
+          user ? <Dashboard /> : <Redirect to='/'/>
+        )} />
       </Switch>
       <Footer />
     </div>

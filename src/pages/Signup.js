@@ -30,7 +30,7 @@ const Signup = (props) => {
                 placeholder="enter email" 
                 onChange={handleChange}
                 />
-                <input type="text" 
+                <input type="password" 
                 // value={signUp.password}
                 name="password" 
                 placeholder="choose a password" 
