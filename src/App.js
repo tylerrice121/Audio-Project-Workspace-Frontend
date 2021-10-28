@@ -38,9 +38,10 @@ function App() {
 
   const createProject = async (p) => {
     const data = {...p, managedBy: user.uid}
+    const token = await user.getIdToken();
     await fetch(API_URL, {
       method: 'POST', 
-      headers: {'Content-type': 'Application/json'},
+      headers: {'Content-type': 'Application/json', 'Authorization': 'Bearer ' + token},
       body: JSON.stringify(data)
     })
     getProjects()
@@ -48,7 +49,7 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => setUser(user));
-    // TODO: only get contacts after a user has signed in
+    // TODO: only get projects after a user has signed in
     getProjects();
     return () => unsubscribe();
   }, [user]);
@@ -72,6 +73,7 @@ function App() {
           <Dashboard 
           projects={projects} 
           createProject={createProject}
+          user={user}
           />) : <Redirect to='/'/>
         )} />
       </Switch>

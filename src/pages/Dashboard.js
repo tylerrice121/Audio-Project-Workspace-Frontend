@@ -1,9 +1,11 @@
+
 import { useState } from "react";
 
 const Dashboard = (props) => {
     const [formState, setFormState] = useState({
         title: "",
         img: "",
+        managedBy: props.user.uid
     })
 
     const handleChange = event => {
@@ -20,6 +22,7 @@ const Dashboard = (props) => {
         setFormState({
             title: "",
             img: "",
+            managedBy: props.user.uid
         })
 
     }

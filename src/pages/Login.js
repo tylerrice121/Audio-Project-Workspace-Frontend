@@ -2,7 +2,6 @@ import { signIn } from "../services/firebase";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { auth } from "../services/firebase";
-import { isCompositeComponentWithType } from "react-dom/test-utils";
 
 const Login = (props) => {
 const [logIn, setLogIn] = useState({
@@ -38,6 +37,7 @@ const handleSubmit = (event) => {
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>
                 <input value={logIn.email} type="text" name="email" onChange={handleChange}/>
+                <input value={logIn.password} type="password" name="password" onChange={handleChange}/>
                 <input type="submit" value="Login"/>
             </form>
             <button onClick={signIn}>Login With Google</button>
