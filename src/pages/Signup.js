@@ -14,9 +14,8 @@ const Signup = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const {email, password} = signUp;
-
-        auth.createUserWithEmailAndPassword(signUp.email, signUp.password).then(cred => {
+        auth.createUserWithEmailAndPassword(signUp.email, signUp.password)
+        .then(cred => {
             console.log(cred);
         });
     };
@@ -25,13 +24,11 @@ const Signup = (props) => {
         <main>
             <form onSubmit={handleSubmit}>
                 <input type="text" 
-                // value={signUp.email}
                 name="email" 
                 placeholder="enter email" 
                 onChange={handleChange}
                 />
                 <input type="password" 
-                // value={signUp.password}
                 name="password" 
                 placeholder="choose a password" 
                 onChange={handleChange}
