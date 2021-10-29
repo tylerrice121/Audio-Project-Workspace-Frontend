@@ -16,27 +16,27 @@ function App() {
 
   const [projects, setProjects] = useState([]);
 
-  const [songs, setSongs] = useState([])
+  // const [songs, setSongs] = useState([])
 
   const fetchData = useRef(null);
 
 
   // const API_URL_SONGS = 'http://localhost:3001/api/songs'
-  const API_URL_SONGS = 'https://apw-api-2344.herokuapp.com/api/songs'
+  // const API_URL_SONGS = 'https://apw-api-2344.herokuapp.com/api/songs'
 
-  const getSongs = async () => {
-      const response = await fetch(API_URL_SONGS);
-      const songs = await response.json();
-      setSongs(songs);
-  };
+  // const getSongs = async () => {
+  //     const response = await fetch(API_URL_SONGS);
+  //     const songs = await response.json();
+  //     setSongs(songs);
+  // };
 
-  useEffect(() => {
-      getSongs();
-  }, [])
+  // useEffect(() => {
+  //     getSongs();
+  // }, [])
 
-  // const API_URL = 'http://localhost:3001/api/projects'
+  const API_URL = 'http://localhost:3001/api/projects'
 
-  const API_URL = 'https://apw-api-2344.herokuapp.com/api/projects'
+  // const API_URL = 'https://apw-api-2344.herokuapp.com/api/projects'
 
   // projects helper functions
   const getProjects = async () => {
@@ -67,14 +67,27 @@ function App() {
     getProjects()
   }
 
+  const createSong = async (song, id) => {
+    if(!user) return;
+    const data = {...song, createdBy: user.uid}
+    const token = await user.getIdToken();
+    await fetch(`${API_URL}/${id}/songs`, {
+      method: 'POST',
+      headers: {'Content-type': 'Application/json', 'Authorization': 'Bearer ' + token},
+      body: JSON.stringify(data)
+    })
+    getProjects();
+  }
+
   
   useEffect(() => {
-    fetchData.current = createProject
+    fetchData.current = getProjects
   })
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setUser(user);
+
       if(user) {
         fetchData.current();
       } else {
@@ -109,7 +122,7 @@ function App() {
           projects={projects} 
           createProject={createProject}
           user={user}
-          />) : <Redirect to='/'/>
+          />) : <Redirect to='/login'/>
         )} />
         <Route 
           path='/project/:id'
@@ -118,9 +131,10 @@ function App() {
               <Project 
                 {...rp}
                 projects={projects}
-                songs={songs}
+                // songs={songs}
+                createSong={createSong}
               />
-            ) : <Redirect to='/'/>
+            ) : <Redirect to='/login'/>
 
           )}
         />
@@ -130,9 +144,9 @@ function App() {
           user ? (
             <Song 
               {...rp}
-              songs={songs}
+              // songs={songs}
             />
-          ) : <Redirect to='/' />
+          ) : <Redirect to='/login' />
         )}
         />  
       </Switch>

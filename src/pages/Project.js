@@ -1,5 +1,5 @@
-// import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+// import { Link } from "react-router-dom";
 
 
 const Project = (props) => {
@@ -7,7 +7,30 @@ const Project = (props) => {
     const id = props.match.params.id;
     const projects = props.projects;
     const project = projects.find(p => p._id === id);
-    console.log(props)
+
+    const [formState, setFormState] = useState({
+        title: "",
+        audio: "",
+    });
+
+    const handleChange = (event) => {
+        setFormState(prevState => ({
+            ...prevState,
+            [event.target.name]: event.target.value
+        }))
+    }
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        props.createSong(formState, id);
+        // console.log(id)
+        setFormState({
+            title: "",
+            audio: ""
+        })
+    }
+
 
     const loading = () => {
         return <h1>loading...</h1>
@@ -17,11 +40,16 @@ const Project = (props) => {
         return (
             <>
             <h2>{project.title}</h2>
-            {props.songs.map((song, idx) => (
+            <form onSubmit={handleSubmit}>
+                <input type="text" name="title" onChange={handleChange} value={formState.title}/>
+                <input type="text" name="audio" onChange={handleChange} value={formState.audio}/>
+                <input type="submit" value="add song" />
+            </form>
+            {/* {props.songs.map((song, idx) => (
                 <Link to={`/song/${song._id}`} key={idx}>
                     <h1>{song.song.title}</h1>
                 </Link>
-            ))}
+            ))} */}
             </>
         )
     }
