@@ -1,4 +1,5 @@
 import firebase from 'firebase/app';
+import { useHistory } from 'react-router-dom';
 
 import 'firebase/auth';
 
@@ -27,7 +28,9 @@ function signIn() {
 
 
 function logOut() {
-    return auth.signOut()
+    // const history = useHistory();
+    // history.pushState('/')
+    return auth.signOut();
 };
 
 export {

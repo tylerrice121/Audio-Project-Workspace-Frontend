@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { logOut } from "../services/firebase";
 import {StyledHeader} from '../styles.js'
 
+
 const Header = (props) => {
     return (
         <StyledHeader>

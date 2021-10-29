@@ -16,6 +16,22 @@ function App() {
 
   const [projects, setProjects] = useState([]);
 
+  // TODO: heroku url
+
+  const [songs, setSongs] = useState([])
+
+  const API_URL_SONGS = 'http://localhost:3001/api/songs'
+
+  const getSongs = async () => {
+      const response = await fetch(API_URL_SONGS);
+      const songs = await response.json();
+      setSongs(songs);
+  };
+
+  useEffect(() => {
+      getSongs();
+  }, [])
+
   // TODO: add heroku api url
   const API_URL = 'http://localhost:3001/api/projects'
 
@@ -79,13 +95,17 @@ function App() {
         <Route 
           path='/project/:id'
           render={(rp) => (
-            <Project 
-              {...rp}
-              projects={projects}
-            />
+            user ? (
+              <Project 
+                {...rp}
+                projects={projects}
+                songs={songs}
+              />
+            ) : <Redirect to='/'/>
 
           )}
-        />  
+        />
+        <Route />  
       </Switch>
       <Footer />
     </div>
