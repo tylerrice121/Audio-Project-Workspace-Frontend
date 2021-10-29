@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 
 const Project = (props) => {
@@ -17,7 +18,9 @@ const Project = (props) => {
             <>
             <h2>{project.title}</h2>
             {props.songs.map((song, idx) => (
-                <h1>{song.song.title}</h1>
+                <Link to={`/song/${song._id}`} key={idx}>
+                    <h1>{song.song.title}</h1>
+                </Link>
             ))}
             </>
         )

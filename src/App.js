@@ -105,7 +105,17 @@ function App() {
 
           )}
         />
-        <Route />  
+        <Route 
+        path='/song/:id'
+        render={(rp) => (
+          user ? (
+            <Song 
+              {...rp}
+              songs={songs}
+            />
+          ) : <Redirect to='/' />
+        )}
+        />  
       </Switch>
       <Footer />
     </div>
