@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -16,9 +16,10 @@ function App() {
 
   const [projects, setProjects] = useState([]);
 
-  // TODO: heroku url
-
   const [songs, setSongs] = useState([])
+
+  const fetchData = useRef(null);
+
 
   // const API_URL_SONGS = 'http://localhost:3001/api/songs'
   const API_URL_SONGS = 'https://apw-api-2344.herokuapp.com/api/songs'
@@ -33,7 +34,6 @@ function App() {
       getSongs();
   }, [])
 
-  // TODO: add heroku api url
   // const API_URL = 'http://localhost:3001/api/projects'
 
   const API_URL = 'https://apw-api-2344.herokuapp.com/api/projects'
@@ -67,10 +67,25 @@ function App() {
     getProjects()
   }
 
+  
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => setUser(user));
+    fetchData.current = createProject
+  })
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      setUser(user);
+      if(user) {
+        fetchData.current();
+      } else {
+        setProjects([])
+      }
+    });
+    
+    
+    
+      
     // TODO: only get projects after a user has signed in
-    getProjects();
     return () => unsubscribe();
   }, [user]);
 

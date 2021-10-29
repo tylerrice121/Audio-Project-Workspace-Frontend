@@ -1,5 +1,4 @@
 import firebase from 'firebase/app';
-import { useHistory } from 'react-router-dom';
 
 import 'firebase/auth';
 

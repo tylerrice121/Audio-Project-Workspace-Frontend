@@ -1,4 +1,4 @@
-
+import { Helmet } from "react-helmet";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -31,6 +31,10 @@ const Dashboard = (props) => {
     }
 
     return (
+        <>
+        <Helmet>
+            <title>Dashboard</title>
+        </Helmet>
         <main>
             <h1>Dashboard</h1>
             <section>
@@ -62,6 +66,8 @@ const Dashboard = (props) => {
                 </div>
             </section>
         </main>
+
+        </>
     );
 };
 
