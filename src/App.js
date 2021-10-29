@@ -20,7 +20,8 @@ function App() {
 
   const [songs, setSongs] = useState([])
 
-  const API_URL_SONGS = 'http://localhost:3001/api/songs'
+  // const API_URL_SONGS = 'http://localhost:3001/api/songs'
+  const API_URL_SONGS = 'https://apw-api-2344.herokuapp.com/api/songs'
 
   const getSongs = async () => {
       const response = await fetch(API_URL_SONGS);
@@ -33,7 +34,9 @@ function App() {
   }, [])
 
   // TODO: add heroku api url
-  const API_URL = 'http://localhost:3001/api/projects'
+  // const API_URL = 'http://localhost:3001/api/projects'
+
+  const API_URL = 'https://apw-api-2344.herokuapp.com/api/projects'
 
   // projects helper functions
   const getProjects = async () => {
@@ -53,6 +56,7 @@ function App() {
   };
 
   const createProject = async (p) => {
+    if(!user) return;
     const data = {...p, managedBy: user.uid}
     const token = await user.getIdToken();
     await fetch(API_URL, {
