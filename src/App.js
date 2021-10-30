@@ -16,7 +16,7 @@ function App() {
 
   const [projects, setProjects] = useState([]);
 
-  // const [songs, setSongs] = useState([])
+  const [songs, setSongs] = useState([])
 
   const fetchData = useRef(null);
 
@@ -54,6 +54,20 @@ function App() {
     setProjects(projects)
 
   };
+
+  const getSongs = async () => {
+    if(!user) return;
+
+    const token = await user.getIdToken();
+    const response = await fetch(API_URL, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
+    const songs = await response.json();
+    setSongs(songs)
+  }
 
   const createProject = async (p) => {
     if(!user) return;
@@ -139,12 +153,12 @@ function App() {
           )}
         />
         <Route 
-        path='/song/:id'
+        path='/project/:id/song/:id'
         render={(rp) => (
           user ? (
             <Song 
               {...rp}
-              // songs={songs}
+              songs={songs}
             />
           ) : <Redirect to='/login' />
         )}
