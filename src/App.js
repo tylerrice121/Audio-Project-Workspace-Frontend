@@ -16,23 +16,7 @@ function App() {
 
   const [projects, setProjects] = useState([]);
 
-  const [songs, setSongs] = useState([])
-
   const fetchData = useRef(null);
-
-
-  // const API_URL_SONGS = 'http://localhost:3001/api/songs'
-  // const API_URL_SONGS = 'https://apw-api-2344.herokuapp.com/api/songs'
-
-  // const getSongs = async () => {
-  //     const response = await fetch(API_URL_SONGS);
-  //     const songs = await response.json();
-  //     setSongs(songs);
-  // };
-
-  // useEffect(() => {
-  //     getSongs();
-  // }, [])
 
   const API_URL = 'http://localhost:3001/api/projects'
 
@@ -54,20 +38,6 @@ function App() {
     setProjects(projects)
 
   };
-
-  const getSongs = async () => {
-    if(!user) return;
-
-    const token = await user.getIdToken();
-    const response = await fetch(API_URL, {
-      method: 'GET',
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    })
-    const songs = await response.json();
-    setSongs(songs)
-  }
 
   const createProject = async (p) => {
     if(!user) return;
@@ -138,8 +108,20 @@ function App() {
           user={user}
           />) : <Redirect to='/login'/>
         )} />
+          <Route 
+          exact path='/project/:id/songs/:songid'
+          render={(rp) => (
+            user ? (
+              <Song 
+                {...rp}
+                projects={projects}
+                // songs={songs}
+              />
+            ) : <Redirect to='/login' />
+          )}
+          />  
         <Route 
-          path='/project/:id'
+          exact path='/project/:id'
           render={(rp) => (
             user ? (
               <Project 
@@ -152,17 +134,6 @@ function App() {
 
           )}
         />
-        <Route 
-        path='/project/:id/song/:id'
-        render={(rp) => (
-          user ? (
-            <Song 
-              {...rp}
-              songs={songs}
-            />
-          ) : <Redirect to='/login' />
-        )}
-        />  
       </Switch>
       <Footer />
     </div>
