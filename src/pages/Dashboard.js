@@ -19,7 +19,6 @@ const Dashboard = (props) => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        // TODO: add user's uid to form
         props.createProject(formState);
         setFormState({
             title: "",

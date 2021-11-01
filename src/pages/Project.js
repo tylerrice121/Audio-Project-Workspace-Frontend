@@ -24,7 +24,7 @@ const Project = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         props.createSong(formState, id);
-        // console.log(id)
+        console.log(formState)
         setFormState({
             title: "",
             audio: ""
@@ -35,6 +35,7 @@ const Project = (props) => {
     const loading = () => {
         return <h1>loading...</h1>
     };
+
     console.log(project.songs)
 
     const loaded = () => {
@@ -45,9 +46,10 @@ const Project = (props) => {
                     project.songs.length ? 
                     <>
                         <br />
-                            {project.songs.map(s => 
-                                <Link key={s._id} to={`/project/${id}/songs/${s._id}`}>
-                                    <p>{s.title}</p>
+                            {project.songs.map((song, index) => 
+                                <Link key={song._id} to={`/project/${id}/songs/${index}`}>
+                                    {console.log(index)}
+                                    <p>{song.title}</p>
                                 </Link>
                             )}
                         <br />

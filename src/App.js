@@ -24,7 +24,7 @@ function App() {
 
   // projects helper functions
   const getProjects = async () => {
-    // get secure id token from firebase user
+    
     if(!user) return;
 
     const token = await user.getIdToken();
@@ -54,6 +54,7 @@ function App() {
   const createSong = async (song, id) => {
     if(!user) return;
     const data = {...song, createdBy: user.uid}
+    // console.log(song)
     const token = await user.getIdToken();
     await fetch(`${API_URL}/${id}/songs`, {
       method: 'POST',
@@ -63,7 +64,22 @@ function App() {
     getProjects();
   }
 
-  
+
+  const updateProject = async (project, id, songId) => {
+    if(!user) return;
+    const data = {...project};
+    // console.log(songId)
+    const token = await user.getIdToken();
+    await fetch(`${API_URL}/${id}/songs/${songId}`, {
+      method: 'PUT',
+      headers: {'Content-type': 'Application/json', 'Authorization': 'Bearer ' + token},
+      body: JSON.stringify(data)
+    })
+    getProjects()
+  }
+
+
+
   useEffect(() => {
     fetchData.current = getProjects
   })
@@ -79,10 +95,7 @@ function App() {
       }
     });
     
-    
-    
-      
-    // TODO: only get projects after a user has signed in
+
     return () => unsubscribe();
   }, [user]);
 
@@ -115,7 +128,7 @@ function App() {
               <Song 
                 {...rp}
                 projects={projects}
-                // songs={songs}
+                updateProject={updateProject}
               />
             ) : <Redirect to='/login' />
           )}
@@ -127,7 +140,6 @@ function App() {
               <Project 
                 {...rp}
                 projects={projects}
-                // songs={songs}
                 createSong={createSong}
               />
             ) : <Redirect to='/login'/>
