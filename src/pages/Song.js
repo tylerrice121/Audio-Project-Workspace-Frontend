@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 const Song = (props) => {
-    // const id = props.match.params.songid;
     const id = props.match.params.id;
     const songId = props.match.params.songid
     const projects = props.projects
@@ -16,7 +15,7 @@ const Song = (props) => {
     const handleChange = (event) => {
         setFormState(prevState => ({
             ...prevState,
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.name === 'completed' ? event.target.checked : event.target.value
         }));
     };
     
@@ -26,18 +25,28 @@ const Song = (props) => {
         props.updateProject(formState, id, songId)
         setFormState({
             item: "",
+            // completed: false
         });
     };
 
-    const handleCheckChange = (id) => {
-        const newList = song.list.map(item => {if(item._id === id)
-            return {...item,completed: !item.completed}
-        return item;  
-    })
-    setFormState(newList)
-    props.updateProject(formState, id, songId)
-    console.log(formState)
-}
+    // const handleCheck = _id => {
+    //     const updatedItem = song.list.map((item, _id) => {
+    //         if (item._id === _id){
+    //             item.completed = !item.completed;
+    //         }
+    //         return item;
+    //     })
+    //     console.log(updatedItem)
+    //     }
+
+    //     // console.log(song.list[0])
+    //     // setFormState(prevState => {
+    //     //     if(song.list._id === id){
+    //     //         console.log('yay')
+    //     //     }
+    //     //     console.log(prevState)
+    //     // })
+    // }
     
     return (
         <main>
@@ -52,8 +61,8 @@ const Song = (props) => {
                                 <input 
                                     type="checkbox" 
                                     name="completed" 
-                                    onChange={() => handleCheckChange(l._id)} 
                                     checked={formState.completed}
+                                    onChange={handleChange}
                                 />
                             </li>              
                         )) }

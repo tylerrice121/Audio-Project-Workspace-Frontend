@@ -48,7 +48,6 @@ const Project = (props) => {
                         <br />
                             {project.songs.map((song, index) => 
                                 <Link key={song._id} to={`/project/${id}/songs/${index}`}>
-                                    {console.log(index)}
                                     <p>{song.title}</p>
                                 </Link>
                             )}
