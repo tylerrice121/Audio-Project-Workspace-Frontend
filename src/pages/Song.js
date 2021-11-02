@@ -41,8 +41,21 @@ const Song = (props) => {
         const newItemList = items.filter(item => item._id !== id)
         setItems(newItemList)
         song.list = newItemList
+        props.updateEntireProject(project, props.match.params.id)
+    }
+
+    const handleCheck = (id) => {
+        const newItemList = items.map(item => {
+            if (item._id === id)
+            return {...item,completed:!item.completed}
+            return item;
+        })
+        setItems(newItemList)
+        song.list = newItemList
         console.log(project)
         props.updateEntireProject(project, props.match.params.id)
+
+        // console.log(newItemList)
     }
 
     return (
@@ -59,7 +72,7 @@ const Song = (props) => {
                                     type="checkbox" 
                                     name="completed" 
                                     checked={formState.completed}
-                                    onChange={handleChange}
+                                    onChange={() => handleCheck(l._id)}
                                 />
                             <span key={l._id}>{l.item} 
                                 <span 
