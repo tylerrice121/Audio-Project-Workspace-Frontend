@@ -9,8 +9,17 @@ const Song = (props) => {
 
     const [formState, setFormState] = useState({
         item: "",
-        completed: false
     });
+    console.log(project)
+
+    const [items, setItems] = useState(song.list)
+
+    const handleAddList = (newList) => {
+        const newListItem = [...items, newList]
+        setItems(newListItem)
+        song.list.push(newList)
+        props.updateProject(newList, id, songId)
+    }
 
     const handleChange = (event) => {
         setFormState(prevState => ({
@@ -21,50 +30,47 @@ const Song = (props) => {
     
     const handleSubmit = (event) => {
         event.preventDefault();
-        song.list.push(formState)
-        props.updateProject(formState, id, songId)
+        const newList = {item: formState.item, id: id, completed: false}
+        handleAddList(newList)
         setFormState({
             item: "",
-            // completed: false
         });
     };
 
-    // const handleCheck = _id => {
-    //     const updatedItem = song.list.map((item, _id) => {
-    //         if (item._id === _id){
-    //             item.completed = !item.completed;
-    //         }
-    //         return item;
-    //     })
-    //     console.log(updatedItem)
-    //     }
+    const handleRemoveList = (id) => {
+        const newItemList = items.filter(item => item._id !== id)
+        setItems(newItemList)
+        song.list = newItemList
+        console.log(project)
+        props.updateEntireProject(project, props.match.params.id)
+    }
 
-    //     // console.log(song.list[0])
-    //     // setFormState(prevState => {
-    //     //     if(song.list._id === id){
-    //     //         console.log('yay')
-    //     //     }
-    //     //     console.log(prevState)
-    //     // })
-    // }
-    
     return (
         <main>
             <h1>Song</h1>
             <h2>{song.title}</h2>
             {
-                song.list.length ? 
+                items.length ? 
                 <>
                     <ul>
-                        {song.list.map((l, _id) => (       
-                            <li key={l._id}>{l.item} 
+                        {items.map((l, _id) => ( 
+                            <div>
                                 <input 
                                     type="checkbox" 
                                     name="completed" 
                                     checked={formState.completed}
                                     onChange={handleChange}
                                 />
-                            </li>              
+                            <span key={l._id}>{l.item} 
+                                <span 
+                                    style={{fontWeight: 600, cursor: "pointer"}}
+                                    onClick={() => handleRemoveList(l._id)}
+                                    >
+                                    X
+                                </span>
+                                <hr />
+                            </span>              
+                            </div>      
                         )) }
                     </ul>
                 </>

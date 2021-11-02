@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-
 const Project = (props) => {
 
     const id = props.match.params.id;
@@ -31,12 +30,9 @@ const Project = (props) => {
         })
     }
 
-
     const loading = () => {
         return <h1>loading...</h1>
     };
-
-    console.log(project.songs)
 
     const loaded = () => {
         return (

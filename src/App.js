@@ -39,6 +39,12 @@ function App() {
 
   };
 
+  // const updateEntireProject = async () => {
+  //     if(!user) return;
+  //     const data = {}
+  // }
+
+
   const createProject = async (p) => {
     if(!user) return;
     const data = {...p, managedBy: user.uid}
@@ -50,6 +56,8 @@ function App() {
     })
     getProjects()
   }
+
+
 
   const createSong = async (song, id) => {
     if(!user) return;
@@ -64,11 +72,24 @@ function App() {
     getProjects();
   }
 
+  const updateEntireProject = async (project, id) => {
+    if (!user) return;
+    const data = {...project}
+    console.log(id)
+    const token = await user.getIdToken();
+    await fetch(`${API_URL}/${id}`, {
+      method: 'PUT',
+      headers: {'Content-type': 'Application/json', 'Authorization': 'Bearer ' + token},
+      body: JSON.stringify(data)
+    })
+    getProjects()
+  }   
+  
 
   const updateProject = async (project, id, songId) => {
     if(!user) return;
     const data = {...project};
-    console.log({...project})
+    // console.log(data)
     const token = await user.getIdToken();
     await fetch(`${API_URL}/${id}/songs/${songId}`, {
       method: 'PUT',
@@ -77,6 +98,20 @@ function App() {
     })
     getProjects()
   }
+
+
+  // const deleteListItem = async (itemToDelete, id, songId) => {
+  //   if(!user) return;
+  //   const data = itemToDelete;
+  //   console.log(data)
+  //   const token = await user.getIdToken();
+  //   await fetch(`${API_URL}/${id}/songs/${songId}`, {
+  //     method: 'DELETE',
+  //     headers: {'Content-type': 'Application/json', 'Authorization': 'Bearer ' + token},
+  //     body: JSON.stringify(data)
+  //   })
+  //   getProjects()
+  // }
 
 
 
@@ -129,6 +164,7 @@ function App() {
                 {...rp}
                 projects={projects}
                 updateProject={updateProject}
+                updateEntireProject={updateEntireProject}
               />
             ) : <Redirect to='/login' />
           )}
