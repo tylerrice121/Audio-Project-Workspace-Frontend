@@ -68,7 +68,7 @@ function App() {
   const updateProject = async (project, id, songId) => {
     if(!user) return;
     const data = {...project};
-    // console.log(songId)
+    console.log({...project})
     const token = await user.getIdToken();
     await fetch(`${API_URL}/${id}/songs/${songId}`, {
       method: 'PUT',
@@ -125,7 +125,7 @@ function App() {
           exact path='/project/:id/songs/:songid'
           render={(rp) => (
             user ? (
-              <Song 
+              <Song
                 {...rp}
                 projects={projects}
                 updateProject={updateProject}
