@@ -67,22 +67,22 @@ const Song = (props) => {
                 <>
                     <ul>
                         {items.map((l, _id) => ( 
-                            <div>
-                                <input 
-                                    type="checkbox" 
-                                    name="completed" 
-                                    checked={formState.completed}
-                                    onChange={() => handleCheck(l._id)}
-                                />
-                            <span key={l._id}>{l.item} 
-                                <span 
-                                    style={{fontWeight: 600, cursor: "pointer"}}
-                                    onClick={() => handleRemoveList(l._id)}
-                                    >
-                                    X
-                                </span>
-                                <hr />
-                            </span>              
+                            <div key={l._id}>
+                                    <input 
+                                        type="checkbox" 
+                                        name="completed" 
+                                        checked={l.completed}
+                                        onChange={() => handleCheck(l._id)}
+                                    />
+                                <span>{l.item} 
+                                    <span 
+                                        style={{fontWeight: 600, cursor: "pointer"}}
+                                        onClick={() => handleRemoveList(l._id)}
+                                        >
+                                        X
+                                    </span>
+                                    <hr />
+                                </span>              
                             </div>      
                         )) }
                     </ul>

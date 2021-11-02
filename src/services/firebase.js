@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 
 import 'firebase/auth';
+import 'firebase/storage'
 
 const firebaseConfig = {
     apiKey: "AIzaSyD_bXfKCY9XPleXjcF8CrxXVbPFHE8ycVI",
@@ -12,7 +13,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 
 // set up auth
 
@@ -35,5 +36,6 @@ function logOut() {
 export {
     auth, 
     signIn,
-    logOut
+    logOut,
+    app
 };

@@ -39,11 +39,6 @@ function App() {
 
   };
 
-  // const updateEntireProject = async () => {
-  //     if(!user) return;
-  //     const data = {}
-  // }
-
 
   const createProject = async (p) => {
     if(!user) return;
@@ -62,7 +57,6 @@ function App() {
   const createSong = async (song, id) => {
     if(!user) return;
     const data = {...song, createdBy: user.uid}
-    // console.log(song)
     const token = await user.getIdToken();
     await fetch(`${API_URL}/${id}/songs`, {
       method: 'POST',
@@ -75,7 +69,6 @@ function App() {
   const updateEntireProject = async (project, id) => {
     if (!user) return;
     const data = {...project}
-    console.log(id)
     const token = await user.getIdToken();
     await fetch(`${API_URL}/${id}`, {
       method: 'PUT',
@@ -89,7 +82,6 @@ function App() {
   const updateProject = async (project, id, songId) => {
     if(!user) return;
     const data = {...project};
-    // console.log(data)
     const token = await user.getIdToken();
     await fetch(`${API_URL}/${id}/songs/${songId}`, {
       method: 'PUT',
@@ -99,21 +91,19 @@ function App() {
     getProjects()
   }
 
-
-  // const deleteListItem = async (itemToDelete, id, songId) => {
-  //   if(!user) return;
-  //   const data = itemToDelete;
-  //   console.log(data)
-  //   const token = await user.getIdToken();
-  //   await fetch(`${API_URL}/${id}/songs/${songId}`, {
-  //     method: 'DELETE',
-  //     headers: {'Content-type': 'Application/json', 'Authorization': 'Bearer ' + token},
-  //     body: JSON.stringify(data)
-  //   })
-  //   getProjects()
-  // }
-
-
+  const deleteProject = async (project, id) => {
+    if(!user) return;
+    const data = {...project}
+    console.log(project)
+    const token = await user.getIdToken();
+    await fetch(`${API_URL}/${id}`, {
+      method: 'DELETE',
+      headers: {'Content-type': 'Application/json', 'Authorization': 'Bearer ' + token},
+      body: JSON.stringify(data)
+    })
+    getProjects()
+  }   
+  
 
   useEffect(() => {
     fetchData.current = getProjects
@@ -154,6 +144,7 @@ function App() {
           projects={projects} 
           createProject={createProject}
           user={user}
+          deleteProject={deleteProject}
           />) : <Redirect to='/login'/>
         )} />
           <Route 

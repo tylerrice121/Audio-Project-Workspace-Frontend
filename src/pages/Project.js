@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { app } from "../services/firebase";
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 
+// const db = app.firestore()
 const Project = (props) => {
 
     const id = props.match.params.id;
@@ -9,14 +13,25 @@ const Project = (props) => {
 
     const [formState, setFormState] = useState({
         title: "",
-        audio: "",
+        audio: ""
     });
+
+    const [fileUrl, setFileUrl] = useState(null)
 
     const handleChange = (event) => {
         setFormState(prevState => ({
             ...prevState,
-            [event.target.name]: event.target.value
+            title: event.target.value,
+            audio: fileUrl
         }))
+    }
+
+    const handleFile = async (event) => {
+        const file = event.target.files[0];
+        const storageRef = app.storage().ref();
+        const fileRef = storageRef.child(file.name)
+        await fileRef.put(file)
+        setFileUrl(await fileRef.getDownloadURL())
     }
 
 
@@ -26,7 +41,6 @@ const Project = (props) => {
         console.log(formState)
         setFormState({
             title: "",
-            audio: ""
         })
     }
 
@@ -43,9 +57,16 @@ const Project = (props) => {
                     <>
                         <br />
                             {project.songs.map((song, index) => 
+                            <div>
+                                
                                 <Link key={song._id} to={`/project/${id}/songs/${index}`}>
                                     <p>{song.title}</p>
                                 </Link>
+                                  <AudioPlayer
+                                  src={song.audio}
+                                  // other props here
+                                />
+                            </div>
                             )}
                         <br />
                     </>
@@ -54,7 +75,8 @@ const Project = (props) => {
                 } 
                 <form onSubmit={handleSubmit}>
                     <input type="text" name="title" onChange={handleChange} value={formState.title}/>
-                    <input type="text" name="audio" onChange={handleChange} value={formState.audio}/>
+                    <input type="file" onChange={handleFile}/>
+
                     <input type="submit" value="add song" />
                 </form>
             </>
