@@ -1,7 +1,6 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
-// import { app } from "../services/firebase";
+import { app } from "../services/firebase";
 
 const Dashboard = (props) => {
     
@@ -9,26 +8,59 @@ const Dashboard = (props) => {
 
     const [formState, setFormState] = useState({
         title: "",
-        // img: "",
+        img: null,
         managedBy: props.user.uid
     })
 
-    // const [fileState, setFileState] = useState(null)
+    const [fileState, setFileState] = useState({
+        img: "",
+        id: ""
+    })
+    
+    const handleFile = async (event) => {
+        const file = event.target.files[0];
+        const storageRef = app.storage().ref();
+        const fileRef = storageRef.child(file.name)
+        await fileRef.put(file)
+        const imgFile = await fileRef.getDownloadURL()
+        setFileState(prevState => ({
+            ...prevState,
+            img: imgFile,
+            id: event.target.id
+        }))
+    }
+
+    const addImg = (event) => {
+        event.preventDefault()
+        const project = projects.filter(project => event.target.id === project._id)
+        project[0].img = fileState.img
+        props.updateEntireProject(project[0], project[0]._id)
+        console.log(project[0]._id)
+        setFileState({
+            img: "",
+            id: ""
+        })
+    }
+    console.log(projects)
 
 
+    const loadingFile = (pr) => {
+        if(fileState.img === null || fileState.img === '') {
+            return 
+        } else if (fileState.id !== pr._id) {
+            return
+        } else {
+            return  <div>
+                        <h1>loaded!</h1>
+                        <input id={pr._id} type="submit" value="Add"/>
+                    </div>
+        }  
+    }
 
-    const handleChange = async (event) => {
-        // if(event.target.name === 'img'){
-        //     const file = event.target.files[0];
-        //     const storageRef = app.storage().ref();
-        //     const fileRef = storageRef.child(file.name)
-        //     await fileRef.put(file)
-        //     setFileState(await fileRef.getDownloadURL())
-        // }
+    const handleChange = (event) => {
         setFormState(prevState => ({
             ...prevState,
             title: event.target.name === 'title' && event.target.value, 
-            // img: fileState
         }))
     }
 
@@ -38,6 +70,7 @@ const Dashboard = (props) => {
         setFormState({
             title: "",
             managedBy: props.user.uid,
+            img: null
         })
     }
 
@@ -58,15 +91,25 @@ const Dashboard = (props) => {
                         name="title" 
                         type="text" 
                     />
-                    {/* <input name="img" type="file" onChange={handleChange}/> */}
                     <input type="submit" value="Add Project"/>
                 </form>
                 <div>
                     {
                         props.projects.map((pr, idx) => (
+
                             <div key={pr._id}>
-                                    <h2>image</h2>
-                                    <img src={pr.img} alt={pr.title} />
+                            {pr.img === '' || pr.img === null ?
+                            <>
+                            <p>upload image</p>
+                            <form id={pr._id} onSubmit={addImg}>
+                                <input id={pr._id} type="file" name="img" onChange={handleFile} />
+                                {loadingFile(pr)}
+                            </form>    
+                            </> 
+                            :
+                            <img src={pr.img} alt={pr.title} />
+                             
+                            }
                                 <Link to={`/project/${pr._id}`} key={idx}>
                                     <h1>{pr.title}</h1>
                                 </Link>

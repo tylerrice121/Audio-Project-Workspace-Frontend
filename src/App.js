@@ -141,6 +141,7 @@ function App() {
           user ? (
           <Dashboard 
           projects={projects} 
+          updateEntireProject={updateEntireProject}
           createProject={createProject}
           user={user}
           deleteProject={deleteProject}

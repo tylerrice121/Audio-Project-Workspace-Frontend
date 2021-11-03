@@ -18,9 +18,7 @@ const Song = (props) => {
         setItems(newListItem)
         console.log(newListItem)
         song.list = newListItem
-        // song.list.push(newList)
         props.updateEntireProject(project, props.match.params.id)
-        // props.updateProject(newList, id, songId)
     }
 
     const handleChange = (event) => {

@@ -17,7 +17,8 @@ const Project = (props) => {
     });
 
     const [fileUrl, setFileUrl] = useState({
-        audio: ""
+        audio: "",
+        id: ""
     })
 
     const handleChange = (event) => {
@@ -36,7 +37,8 @@ const Project = (props) => {
         const audioFile = await fileRef.getDownloadURL()
         setFileUrl(prevState => ({
             ...prevState,
-            audio: audioFile
+            audio: audioFile,
+            id: event.target.id
         }))
     }
 
@@ -55,9 +57,11 @@ const Project = (props) => {
         event.preventDefault()
         props.updateEntireProject(project, props.match.params.id)
         setFileUrl({
-            audio: null
+            audio: null,
+            id: ""
         })
     }
+
 
     const handleDelete = (id) => {
         const newSongList = project.songs.filter(song => song._id !== id)
@@ -66,17 +70,17 @@ const Project = (props) => {
         props.updateEntireProject(project, props.match.params.id)
     }
     
-    
     const loadingFile = (song) => {
-        if(fileUrl.audio === null || fileUrl.audio === '') {
+        if(fileUrl.audio === null || fileUrl.audio === ''){
+            return
+        } else if (song._id !== fileUrl.id){
             return 
         } else {
             return  <div>
                         <h1>loaded!</h1>
                         <input id={song._id} type="submit" value="Add"/>
                     </div>
-
-        }  
+        }
     }
   
     const loading = () => {
@@ -99,10 +103,10 @@ const Project = (props) => {
                                 </Link>
                                 {song.audio === "" || song.audio === null ?
                                 <form id={song._id} onSubmit={addSong}>
-                                    <input type="file" onChange={handleFile}/>
+                                    <input id={song._id} type="file" onChange={handleFile}/>
                                     {loadingFile(song)}
                                 </form>                          
-                                :     
+                                :
                                 <>
                                 <AudioPlayer
                                 src={song.audio}
