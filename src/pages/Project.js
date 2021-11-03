@@ -58,6 +58,13 @@ const Project = (props) => {
             audio: null
         })
     }
+
+    const handleDelete = (id) => {
+        const newSongList = project.songs.filter(song => song._id !== id)
+        project.songs = newSongList
+        console.log(project.songs)
+        props.updateEntireProject(project, props.match.params.id)
+    }
     
     
     const loadingFile = (song) => {
@@ -95,17 +102,14 @@ const Project = (props) => {
                                     <input type="file" onChange={handleFile}/>
                                     {loadingFile(song)}
                                 </form>                          
-                                :
+                                :     
                                 <>
                                 <AudioPlayer
                                 src={song.audio}
                                 />
-                                {/* <form id={song._id} onSubmit={addSong}>
-                                    <input type="file" onChange={handleFile}/>
-                                    {loadingFile(song)}
-                                </form>     */}
-                                </>
+                                </>                          
                                 }
+                                <button type="submit" onClick={()=> handleDelete(song._id)}>DELETE SONG</button>
                             </div>
                             )}
                         <br />
