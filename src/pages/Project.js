@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 import { app } from "../services/firebase";
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
+import { TextField} from "@mui/material";
+import '@fontsource/roboto/400.css';
 
-// const db = app.firestore()
 const Project = (props) => {
 
     const id = props.match.params.id;
@@ -96,25 +100,27 @@ const Project = (props) => {
                     <>
                         <br />
                             {project.songs.map((song, index) => 
-                            <div key={song._id}>
-                                
-                                <Link to={`/project/${id}/songs/${index}`}>
-                                    <p>{song.title}</p>
-                                </Link>
-                                {song.audio === "" || song.audio === null ?
-                                <form id={song._id} onSubmit={addSong}>
-                                    <input id={song._id} type="file" onChange={handleFile}/>
-                                    {loadingFile(song)}
-                                </form>                          
-                                :
-                                <>
-                                <AudioPlayer
-                                src={song.audio}
-                                />
-                                </>                          
-                                }
-                                <button type="submit" onClick={()=> handleDelete(song._id)}>DELETE SONG</button>
-                            </div>
+                            <Box key={song._id}>
+                                <Paper>
+                                    <Link to={`/project/${id}/songs/${index}`}>
+                                        <p>{song.title}</p>
+                                    </Link>
+                                    {song.audio === "" || song.audio === null ?
+                                    <form id={song._id} onSubmit={addSong}>
+                                        <TextField id={song._id} type="file" onChange={handleFile}/>
+
+                                        {loadingFile(song)}
+                                    </form>                          
+                                    :
+                                    <>
+                                    <AudioPlayer
+                                    src={song.audio}
+                                    />
+                                    </>                          
+                                    }
+                                    <Button type="submit" onClick={()=> handleDelete(song._id)}>DELETE SONG</Button>
+                                </Paper>
+                            </Box>
                             )}
                         <br />
                     </>
@@ -122,8 +128,8 @@ const Project = (props) => {
                     <p>No Songs Yet</p>
                 } 
                 <form onSubmit={handleSubmit}>
-                    <input type="text" name="title" onChange={handleChange} value={formState.title}/>
-                    <input type="submit" value="add song" />
+                    <TextField type="text" name="title" onChange={handleChange} value={formState.title}/>
+                    <TextField type="submit" value="add song" />
                 </form>
             </>
         )
