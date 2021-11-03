@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { app } from "../services/firebase";
 
@@ -9,25 +9,26 @@ const Dashboard = (props) => {
 
     const [formState, setFormState] = useState({
         title: "",
-        img: "",
+        // img: "",
         managedBy: props.user.uid
     })
 
-    const [fileState, setFileState] = useState(null)
+    // const [fileState, setFileState] = useState(null)
 
-    const handleFile = async (event) => {
-        const file = event.target.files[0];
-        const storageRef = app.storage().ref();
-        const fileRef = storageRef.child(file.name)
-        await fileRef.put(file)
-        setFileState(await fileRef.getDownloadURL())
-    }
 
-    const handleChange = (event) => {
+
+    const handleChange = async (event) => {
+        // if(event.target.name === 'img'){
+        //     const file = event.target.files[0];
+        //     const storageRef = app.storage().ref();
+        //     const fileRef = storageRef.child(file.name)
+        //     await fileRef.put(file)
+        //     setFileState(await fileRef.getDownloadURL())
+        // }
         setFormState(prevState => ({
             ...prevState,
-            title: event.target.value,
-            img: fileState
+            title: event.target.name === 'title' && event.target.value, 
+            // img: fileState
         }))
     }
 
@@ -36,10 +37,10 @@ const Dashboard = (props) => {
         props.createProject(formState);
         setFormState({
             title: "",
-            img: null,
+            // img: null,
             managedBy: props.user.uid,
-            _id: ""
         })
+        console.log('yay')
     }
 
     const handleDelete = (id) => {
@@ -64,7 +65,7 @@ const Dashboard = (props) => {
                         name="title" 
                         type="text" 
                     />
-                    <input type="file" onChange={handleFile}/>
+                    {/* <input name="img" type="file" onChange={handleChange}/> */}
                     <input type="submit" value="Add Project"/>
                 </form>
                 <div>
@@ -78,7 +79,7 @@ const Dashboard = (props) => {
                                 </Link>
                                 <button type="submit" onClick={()=> handleDelete(pr._id)}>DELETE</button>
                             </div>
-                        ))
+                        )).reverse()
                     }
                 </div>
             </section>
