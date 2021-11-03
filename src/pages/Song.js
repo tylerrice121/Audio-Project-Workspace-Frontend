@@ -10,27 +10,31 @@ const Song = (props) => {
     const [formState, setFormState] = useState({
         item: "",
     });
-    console.log(project)
+    // console.log(project)
 
     const [items, setItems] = useState(song.list)
 
     const handleAddList = (newList) => {
         const newListItem = [...items, newList]
+        console.log(newListItem)
         setItems(newListItem)
         song.list.push(newList)
-        props.updateProject(newList, id, songId)
+        props.updateEntireProject(project, props.match.params.id)
+        // props.updateProject(newList, id, songId)
     }
 
     const handleChange = (event) => {
         setFormState(prevState => ({
             ...prevState,
-            [event.target.name]: event.target.name === 'completed' ? event.target.checked : event.target.value
+            [event.target.name]: event.target.value
         }));
     };
     
     const handleSubmit = (event) => {
         event.preventDefault();
-        const newList = {item: formState.item, id: id, completed: false}
+        const uniqueId = Math.floor(Math.random() * 100)
+        console.log(uniqueId)
+        const newList = {item: formState.item, _id: uniqueId, completed: false}
         handleAddList(newList)
         setFormState({
             item: "",
@@ -54,8 +58,6 @@ const Song = (props) => {
         song.list = newItemList
         console.log(project)
         props.updateEntireProject(project, props.match.params.id)
-
-        // console.log(newItemList)
     }
 
     return (
@@ -64,29 +66,28 @@ const Song = (props) => {
             <h2>{song.title}</h2>
             {
                 items.length ? 
-                <>
-                    <ul>
-                        {items.map((l, _id) => ( 
-                            <div key={l._id}>
-                                    <input 
-                                        type="checkbox" 
-                                        name="completed" 
-                                        checked={l.completed}
-                                        onChange={() => handleCheck(l._id)}
-                                    />
-                                <span>{l.item} 
-                                    <span 
-                                        style={{fontWeight: 600, cursor: "pointer"}}
-                                        onClick={() => handleRemoveList(l._id)}
-                                        >
-                                        X
-                                    </span>
-                                    <hr />
-                                </span>              
+                    <ul key={song.title}>
+                        {items.map(item => ( 
+                            <div key={item._id}>
+                                {console.log(item._id)}
+                                <input
+                                    type="checkbox" 
+                                    name="completed" 
+                                    checked={item.completed}
+                                    onChange={() => handleCheck(item._id)}
+                                />
+                                <div>
+                                    <p>{item.item}</p>
+                                    <p 
+                                    style={{fontWeight: 600, cursor: "pointer"}}
+                                    onClick={() => handleRemoveList(item._id)}
+                                    >
+                                    X
+                                    </p>
+                                </div>              
                             </div>      
                         )) }
-                    </ul>
-                </>
+                    </ul>          
                 :
                 <p>No List Yet</p>
             }

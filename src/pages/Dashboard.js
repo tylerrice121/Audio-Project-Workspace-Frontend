@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet";
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 // import { app } from "../services/firebase";
@@ -52,9 +52,6 @@ const Dashboard = (props) => {
 
     return (
         <>
-        <Helmet>
-            <title>Dashboard</title>
-        </Helmet>
         <main>
             <h1>Dashboard</h1>
             <section>

@@ -18,9 +18,9 @@ function App() {
 
   const fetchData = useRef(null);
 
-  const API_URL = 'http://localhost:3002/api/projects'
+  // const API_URL = 'http://localhost:3002/api/projects'
 
-  // const API_URL = 'https://apw-api-2344.herokuapp.com/api/projects'
+  const API_URL = 'https://apw-api-2344.herokuapp.com/api/projects'
 
   // projects helper functions
   const getProjects = async () => {

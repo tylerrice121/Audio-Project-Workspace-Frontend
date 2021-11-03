@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { app } from "../services/firebase";
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
-import { render } from "@testing-library/react";
 
 // const db = app.firestore()
 const Project = (props) => {
@@ -65,26 +64,23 @@ const Project = (props) => {
         })
     }
     
+    
     const loadingFile = (song) => {
-        console.log(fileUrl.audio)
-        // console.log('clicked')
         if(fileUrl.audio === null || fileUrl.audio === '') {
-            return <h1>loading...</h1>
+            return 
         } else {
-            return <div>
-                <h1>loaded!</h1>
-                <input id={song._id} type="submit" value="Add"/>
-                </div>
-        }
-        
+            return  <div>
+                        <h1>loaded!</h1>
+                        <input id={song._id} type="submit" value="Add"/>
+                    </div>
+
+        }  
     }
-
-
-
+  
     const loading = () => {
         return <h1>loading...</h1>
     };
-
+    
     const loaded = () => {
         return (
             <>
@@ -101,15 +97,19 @@ const Project = (props) => {
                                 </Link>
                                 {song.audio === "" || song.audio === null ?
                                 <form id={song._id} onSubmit={addSong}>
-                                    <input type="file" onClick={() => loadingFile(song)} onChange={handleFile}/>
-                                    {loadingFile(song)}                     
+                                    <input type="file" onChange={handleFile}/>
+                                    {loadingFile(song)}
                                 </form>                          
                                 :
+                                <>
                                 <AudioPlayer
                                 src={song.audio}
-                                // other props here
-                              />
-
+                                />
+                                {/* <form id={song._id} onSubmit={addSong}>
+                                    <input type="file" onChange={handleFile}/>
+                                    {loadingFile(song)}
+                                </form>     */}
+                                </>
                                 }
                             </div>
                             )}
