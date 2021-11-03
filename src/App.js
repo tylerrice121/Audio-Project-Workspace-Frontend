@@ -18,7 +18,7 @@ function App() {
 
   const fetchData = useRef(null);
 
-  const API_URL = 'http://localhost:3001/api/projects'
+  const API_URL = 'http://localhost:3002/api/projects'
 
   // const API_URL = 'https://apw-api-2344.herokuapp.com/api/projects'
 
@@ -168,6 +168,7 @@ function App() {
                 {...rp}
                 projects={projects}
                 createSong={createSong}
+                updateEntireProject={updateEntireProject}
               />
             ) : <Redirect to='/login'/>
 

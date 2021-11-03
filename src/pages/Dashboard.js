@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { app } from "../services/firebase";
+// import { app } from "../services/firebase";
 
 const Dashboard = (props) => {
     

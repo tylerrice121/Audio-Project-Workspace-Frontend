@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { app } from "../services/firebase";
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
+import { render } from "@testing-library/react";
 
 // const db = app.firestore()
 const Project = (props) => {
@@ -16,13 +17,15 @@ const Project = (props) => {
         audio: ""
     });
 
-    const [fileUrl, setFileUrl] = useState(null)
+    const [fileUrl, setFileUrl] = useState({
+        audio: ""
+    })
 
     const handleChange = (event) => {
         setFormState(prevState => ({
             ...prevState,
             title: event.target.value,
-            audio: fileUrl
+            audio: null
         }))
     }
 
@@ -31,18 +34,52 @@ const Project = (props) => {
         const storageRef = app.storage().ref();
         const fileRef = storageRef.child(file.name)
         await fileRef.put(file)
-        setFileUrl(await fileRef.getDownloadURL())
+        const audioFile = await fileRef.getDownloadURL()
+        setFileUrl(prevState => ({
+            ...prevState,
+            audio: audioFile
+        }))
     }
-
 
     const handleSubmit = (event) => {
         event.preventDefault();
         props.createSong(formState, id);
-        console.log(formState)
         setFormState({
             title: "",
+            audio: null
         })
     }
+
+    const addSong = (event) => {
+        const song = project.songs.filter(song => event.target.id === song._id)
+        // song.audio = fileUrl.audio
+        // ({...song, audio: fileUrl})
+            song[0].audio = fileUrl.audio
+    
+        console.log(song)
+        // console.log(...song, fileUrl)
+        event.preventDefault()
+        props.updateEntireProject(project, props.match.params.id)
+        setFileUrl({
+            audio: null
+        })
+    }
+    
+    const loadingFile = (song) => {
+        console.log(fileUrl.audio)
+        // console.log('clicked')
+        if(fileUrl.audio === null || fileUrl.audio === '') {
+            return <h1>loading...</h1>
+        } else {
+            return <div>
+                <h1>loaded!</h1>
+                <input id={song._id} type="submit" value="Add"/>
+                </div>
+        }
+        
+    }
+
+
 
     const loading = () => {
         return <h1>loading...</h1>
@@ -57,15 +94,23 @@ const Project = (props) => {
                     <>
                         <br />
                             {project.songs.map((song, index) => 
-                            <div>
+                            <div key={song._id}>
                                 
-                                <Link key={song._id} to={`/project/${id}/songs/${index}`}>
+                                <Link to={`/project/${id}/songs/${index}`}>
                                     <p>{song.title}</p>
                                 </Link>
-                                  <AudioPlayer
-                                  src={song.audio}
-                                  // other props here
-                                />
+                                {song.audio === "" || song.audio === null ?
+                                <form id={song._id} onSubmit={addSong}>
+                                    <input type="file" onClick={() => loadingFile(song)} onChange={handleFile}/>
+                                    {loadingFile(song)}                     
+                                </form>                          
+                                :
+                                <AudioPlayer
+                                src={song.audio}
+                                // other props here
+                              />
+
+                                }
                             </div>
                             )}
                         <br />
@@ -75,8 +120,6 @@ const Project = (props) => {
                 } 
                 <form onSubmit={handleSubmit}>
                     <input type="text" name="title" onChange={handleChange} value={formState.title}/>
-                    <input type="file" onChange={handleFile}/>
-
                     <input type="submit" value="add song" />
                 </form>
             </>
