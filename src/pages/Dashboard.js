@@ -37,17 +37,13 @@ const Dashboard = (props) => {
         props.createProject(formState);
         setFormState({
             title: "",
-            // img: null,
             managedBy: props.user.uid,
         })
-        console.log('yay')
     }
 
     const handleDelete = (id) => {
-        console.log(id)
         const project = projects.find(p => p._id === id);
         props.deleteProject(project, id)
-        // console.log(project)
     }
 
     return (

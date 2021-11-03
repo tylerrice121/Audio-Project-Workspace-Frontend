@@ -51,12 +51,7 @@ const Project = (props) => {
 
     const addSong = (event) => {
         const song = project.songs.filter(song => event.target.id === song._id)
-        // song.audio = fileUrl.audio
-        // ({...song, audio: fileUrl})
-            song[0].audio = fileUrl.audio
-    
-        console.log(song)
-        // console.log(...song, fileUrl)
+        song[0].audio = fileUrl.audio
         event.preventDefault()
         props.updateEntireProject(project, props.match.params.id)
         setFileUrl({

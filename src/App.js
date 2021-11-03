@@ -94,7 +94,6 @@ function App() {
   const deleteProject = async (project, id) => {
     if(!user) return;
     const data = {...project}
-    console.log(project)
     const token = await user.getIdToken();
     await fetch(`${API_URL}/${id}`, {
       method: 'DELETE',

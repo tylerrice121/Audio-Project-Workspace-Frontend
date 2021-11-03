@@ -10,15 +10,15 @@ const Song = (props) => {
     const [formState, setFormState] = useState({
         item: "",
     });
-    // console.log(project)
 
     const [items, setItems] = useState(song.list)
 
     const handleAddList = (newList) => {
         const newListItem = [...items, newList]
-        console.log(newListItem)
         setItems(newListItem)
-        song.list.push(newList)
+        console.log(newListItem)
+        song.list = newListItem
+        // song.list.push(newList)
         props.updateEntireProject(project, props.match.params.id)
         // props.updateProject(newList, id, songId)
     }
@@ -32,8 +32,7 @@ const Song = (props) => {
     
     const handleSubmit = (event) => {
         event.preventDefault();
-        const uniqueId = Math.floor(Math.random() * 100)
-        console.log(uniqueId)
+        const uniqueId = Math.floor(Math.random() * Math.floor(Math.random() * Date.now()))
         const newList = {item: formState.item, _id: uniqueId, completed: false}
         handleAddList(newList)
         setFormState({
@@ -56,7 +55,6 @@ const Song = (props) => {
         })
         setItems(newItemList)
         song.list = newItemList
-        console.log(project)
         props.updateEntireProject(project, props.match.params.id)
     }
 
@@ -69,7 +67,6 @@ const Song = (props) => {
                     <ul key={song.title}>
                         {items.map(item => ( 
                             <div key={item._id}>
-                                {console.log(item._id)}
                                 <input
                                     type="checkbox" 
                                     name="completed" 
