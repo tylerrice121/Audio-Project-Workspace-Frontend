@@ -209,6 +209,7 @@ export const StyledLogin = styled.div `
                 border-radius: 6px;
                 @media only screen and (max-width: 600px),
                 only screen and (max-height: 600px) {
+                    display: none;
                 width: 110px;
                 height: 35px;
                 margin: 0;
