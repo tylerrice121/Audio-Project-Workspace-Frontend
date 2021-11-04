@@ -2,6 +2,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { app } from "../services/firebase";
 import Header from '../components/Header';
+import { StyledDash } from "../styles";
+import { TextField } from "@mui/material";
+import { Button } from "@mui/material";
+import { useRef } from "react";
 
 const Dashboard = (props) => {
     
@@ -42,7 +46,6 @@ const Dashboard = (props) => {
             id: ""
         })
     }
-    console.log(projects)
 
 
     const loadingFile = (pr) => {
@@ -51,9 +54,8 @@ const Dashboard = (props) => {
         } else if (fileState.id !== pr._id) {
             return
         } else {
-            return  <div>
-                        <h1>loaded!</h1>
-                        <input id={pr._id} type="submit" value="Add"/>
+            return  <div className="loaded">
+                        <Button className="loadedButton" id={pr._id} variant="outlined" type="submit">ADD</Button>
                     </div>
         }  
     }
@@ -80,50 +82,56 @@ const Dashboard = (props) => {
         props.deleteProject(project, id)
     }
 
-    return (
-        <>
-        <main>
-        <Header user={props.user}/>
-            <h1>Projects</h1>
-            <section>
-                <form onSubmit={handleSubmit}>
-                    <input 
-                        onChange={handleChange} 
-                        value={formState.title} 
-                        name="title" 
-                        type="text" 
-                    />
-                    <input type="submit" value="Add Project"/>
-                </form>
-                <div>
-                    {
-                        props.projects.map((pr, idx) => (
+    const hiddenFileInput = useRef(null);
 
-                            <div key={pr._id}>
-                            {pr.img === '' || pr.img === null ?
-                            <>
-                            <p>upload image</p>
+    const handleClick = event => {
+        hiddenFileInput.current.click();
+    };
+
+    return (
+        <StyledDash>
+            <Header user={props.user}/>
+                <div className="top">
+                    <form onSubmit={handleSubmit} className="form">
+                        <TextField 
+                            id="standard-basic" 
+                            label="New Project" 
+                            variant="standard"
+                            onChange={handleChange} 
+                            value={formState.title} 
+                            name="title" 
+                            type="text" 
+                            />
+                        <Button className="addButton" variant="outlined" type="submit">Add</Button>
+                    </form> 
+                </div>
+                <div className="main">
+                    {
+                    props.projects.map((pr, idx) => (
+                    <div key={pr._id} className="projects">
+                        {pr.img === '' || pr.img === null ?
+                        <div className="upload">
                             <form id={pr._id} onSubmit={addImg}>
-                                <input id={pr._id} type="file" name="img" onChange={handleFile} />
+                                <Button className="bottomButton" variant="outlined" type="button" onClick={handleClick}>Upload Image</Button>
+                                <input ref={hiddenFileInput} className="choosefile" id={pr._id} type="file" name="img" onChange={handleFile} />
                                 {loadingFile(pr)}
                             </form>    
-                            </> 
-                            :
-                            <img style={{width: 350}}src={pr.img} alt={pr.title} />
-                             
-                            }
-                                <Link to={`/project/${pr._id}`} key={idx}>
-                                    <h1>{pr.title}</h1>
-                                </Link>
-                                <button type="submit" onClick={()=> handleDelete(pr._id)}>DELETE</button>
-                            </div>
-                        )).reverse()
+                        </div> 
+                        :
+                        <img style={{width: 350, height: 350}}src={pr.img} alt={pr.title} />
+                        }
+                        <h3>{pr.title}</h3>
+                        <div className="bottom">
+                            <Link to={`/project/${pr._id}`} key={idx}>
+                                <Button className="bottomButton" variant="outlined" type="button">VIEW</Button>
+                            </Link>
+                            <Button className="bottomButton" variant="outlined" type="submit" onClick={()=> handleDelete(pr._id)}>DELETE</Button>
+                        </div>
+                    </div>
+                    )).reverse()
                     }
                 </div>
-            </section>
-        </main>
-
-        </>
+        </StyledDash>
     );
 };
 

@@ -8,6 +8,7 @@ export const StyledHeader = styled.header `
     background-color: black;
     color: white;
     align-items: center;
+    width: 100%;
     nav {
         display: flex;
         align-items: center;
@@ -71,7 +72,7 @@ $medium: 1200px;
                 height: 45px;
                 color: #585858;
                 text-decoration: none;
-                border: 2px solid #585858;
+                border: 1.5px solid #585858;
                 border-radius: 6px;
                 @media only screen and (max-width: 600px),
                 only screen and (max-height: 600px) {
@@ -207,7 +208,7 @@ export const StyledLogin = styled.div `
                 height: 40px;
                 color: #585858;
                 text-decoration: none;
-                border: 2px solid #585858;
+                border: 1px solid #585858;
                 border-radius: 6px;
                 @media only screen and (max-width: 600px),
                 only screen and (max-height: 600px) {
@@ -230,9 +231,6 @@ export const StyledLogin = styled.div `
                 p{
                     margin: 0;
                     font-size: 12px;
-                    /* @media only screen and (max-width: 600px),
-                    only screen and (max-height: 600px) {
-                    display: none; */
                 }
                 }
                 a {
@@ -259,8 +257,9 @@ export const StyledLogin = styled.div `
                 }
             }
         }
-    }
+    
 `;
+
 export const StyledSignup = styled.div `
     display: -webkit-flex;
     height: 100vh;
@@ -360,7 +359,7 @@ export const StyledSignup = styled.div `
                 height: 40px;
                 color: #585858;
                 text-decoration: none;
-                border: 2px solid #585858;
+                border: 1px solid #585858;
                 border-radius: 6px;
                 @media only screen and (max-width: 600px),
                 only screen and (max-height: 600px) {
@@ -409,4 +408,109 @@ export const StyledSignup = styled.div `
             }
         }
     }
+`;
+
+export const StyledDash = styled.div `
+    display: -webkit-flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    .top{
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        margin-bottom: 20px;
+        margin-top: 30px;
+        .form {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            input{
+                width: 200px;
+            }
+            .addButton{
+                color: #585858;
+                border-color: #585858;
+                align-self: flex-end;
+                height: 30px;
+                width: 10px;
+            }
+        }
+    }
+    .main{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        .projects{
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+            width: 350px;
+            height: 475px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+            .upload{
+                border: 1px solid gray;
+                display: flex;
+                flex-direction: column;
+                align-content: center;
+                justify-content: center;
+                height: 350px;
+                width: 350px;
+                .loaded{
+                    margin-top: 10px;
+                    .loadedButton{
+                    justify-self: center;
+                    color: #585858;
+                    border-color: #585858;
+                    font-size: 12px;
+                    height: 40px;
+                    width: 145px; 
+                    }
+                }
+                .bottomButton{
+                justify-self: center;
+                color: #585858;
+                border-color: #585858;
+                font-size: 12px;
+                height: 40px;
+                width: 145px;
+                }
+                .choosefile{
+                    display: none;
+                }
+            }
+            .title{
+                text-decoration: none;
+                color: #292929;
+            }
+            .bottom{
+                width: 100%;
+                display: flex;
+                align-content: center;
+                justify-content: space-between;
+                a{
+                    text-decoration: none;
+                }
+                .bottomButton{
+                justify-self: center;
+                color: #585858;
+                border-color: #585858;
+                font-size: 12px;
+                height: 30px;
+                width: 10px;
+                margin-right: 20px;
+                margin-left: 20px;
+                }
+            }
+        }
+    }
+
 `;
