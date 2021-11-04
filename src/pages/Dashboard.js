@@ -84,7 +84,7 @@ const Dashboard = (props) => {
         <>
         <main>
         <Header user={props.user}/>
-            <h1>Dashboard</h1>
+            <h1>Projects</h1>
             <section>
                 <form onSubmit={handleSubmit}>
                     <input 
