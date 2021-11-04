@@ -49,8 +49,8 @@ $medium: 1200px;
         width: 500px;
         height: 500px;
         border-radius: 50%;
-        @media screen and (max-width: 600px),
-        screen and (max-height: 600px) {
+        @media only screen and (max-width: 600px),
+        only screen and (max-height: 600px) {
             width: 360px;
             height: 360px;
         }
@@ -73,8 +73,8 @@ $medium: 1200px;
                 text-decoration: none;
                 border: 2px solid #585858;
                 border-radius: 6px;
-                @media screen and (max-width: 600px),
-                screen and (max-height: 600px) {
+                @media only screen and (max-width: 600px),
+                only screen and (max-height: 600px) {
                 width: 130px;
                 height: 35px;
                 }
@@ -91,15 +91,15 @@ $medium: 1200px;
                 font-family: 'Bowlby One SC', cursive;
                 font-size: 60px;
                 margin: 0;
-                @media screen and (max-width: 600px),
-                screen and (max-height: 600px) {
+                @media only screen and (max-width: 600px),
+                only screen and (max-height: 600px) {
                 font-size: 50px;
                 }
             }
             h2{
                 color: #292929;
-                @media screen and (max-width: 600px),
-                screen and (max-height: 600px) {
+                @media only screen and (max-width: 600px),
+                only screen and (max-height: 600px) {
                 font-size: 20px;
                 }
             }
@@ -125,8 +125,8 @@ export const StyledLogin = styled.div `
         width: 500px;
         height: 500px;
         border-radius: 50%;
-        @media screen and (max-width: 600px),
-        screen and (max-height: 600px) {
+        @media only screen and (max-width: 600px),
+        only screen and (max-height: 600px) {
             width: 360px;
             height: 360px;
         }
@@ -137,15 +137,15 @@ export const StyledLogin = styled.div `
                 font-family: 'Bowlby One SC', cursive;
                 font-size: 60px;
                 margin: 0;
-                @media screen and (max-width: 600px),
-                screen and (max-height: 600px) {
+                @media only screen and (max-width: 600px),
+                only screen and (max-height: 600px) {
                 font-size: 50px;
                 }
             }
             h2{
                 color: #292929;
-                @media screen and (max-width: 600px),
-                screen and (max-height: 600px) {
+                @media only screen and (max-width: 600px),
+                only screen and (max-height: 600px) {
                 font-size: 20px;
                 }
             }
@@ -157,8 +157,8 @@ export const StyledLogin = styled.div `
             justify-content: flex-start;
             align-content: center;
             height: 300px;
-            @media screen and (max-width: 600px),
-            screen and (max-height: 600px) {
+            @media only screen and (max-width: 600px),
+            only screen and (max-height: 600px) {
                 height: 250px;
             }
             .google{
@@ -180,8 +180,8 @@ export const StyledLogin = styled.div `
                 align-content: center;
                 justify-content: space-evenly;
                 width: 300px;
-                @media screen and (max-width: 600px),
-                screen and (max-height: 600px) {
+                @media only screen and (max-width: 600px),
+                only screen and (max-height: 600px) {
                 width: 250px;
                 height: 200px;
                 }
@@ -207,8 +207,8 @@ export const StyledLogin = styled.div `
                 text-decoration: none;
                 border: 2px solid #585858;
                 border-radius: 6px;
-                @media screen and (max-width: 600px),
-                screen and (max-height: 600px) {
+                @media only screen and (max-width: 600px),
+                only screen and (max-height: 600px) {
                 width: 110px;
                 height: 35px;
                 margin: 0;
@@ -221,14 +221,14 @@ export const StyledLogin = styled.div `
                 display: flex;
                 flex-direction: column;
                 height: 20px;
-                @media screen and (max-width: 600px),
-                screen and (max-height: 600px) {
+                @media only screen and (max-width: 600px),
+                only screen and (max-height: 600px) {
                     margin-top: 10px;
                 }
                 p{
                     margin: 0;
-                    @media screen and (max-width: 600px),
-                    screen and (max-height: 600px) {
+                    @media only screen and (max-width: 600px),
+                    only screen and (max-height: 600px) {
                     display: none;
                 }
                 }
@@ -243,8 +243,8 @@ export const StyledLogin = styled.div `
                     width: 140px;
                     height: 45px;
                     color: #585858;
-                    @media screen and (max-width: 600px),
-                    screen and (max-height: 600px) {
+                    @media only screen and (max-width: 600px),
+                    only screen and (max-height: 600px) {
                     width: 130px;
                     height: 35px;
                     }
