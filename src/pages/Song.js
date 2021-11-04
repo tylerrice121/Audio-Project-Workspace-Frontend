@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Header from "../components/Header";
 
 const Song = (props) => {
     const id = props.match.params.id;
@@ -58,6 +59,7 @@ const Song = (props) => {
 
     return (
         <main>
+        <Header user={props.user}/>    
             <h1>Song</h1>
             <h2>{song.title}</h2>
             {

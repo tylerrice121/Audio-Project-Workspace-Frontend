@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
-import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
@@ -130,20 +129,19 @@ function App() {
 
   return (
     <div className="App">
-      <Header user={user}/>
       <Switch>
         <Route exact path='/'>
           <Home />
         </Route>
         <Route path='/login' render={() => (
           user ? <Redirect to='/dashboard' /> : <Login />
-        )} />
+          )} />
         <Route path='/signup' render={() => (
           user ? <Redirect to='/dashboard' /> : <Signup />
-        )} />
+          )} />
         <Route path='/dashboard' render={() => (
           user ? (
-          <Dashboard 
+            <Dashboard 
           projects={projects} 
           updateEntireProject={updateEntireProject}
           createProject={createProject}
@@ -157,6 +155,7 @@ function App() {
             user ? (
               <Song
                 {...rp}
+                user={user}
                 projects={projects}
                 updateProject={updateProject}
                 updateEntireProject={updateEntireProject}
@@ -170,6 +169,7 @@ function App() {
             user ? (
               <Project 
                 {...rp}
+                user={user}
                 projects={projects}
                 createSong={createSong}
                 updateEntireProject={updateEntireProject}

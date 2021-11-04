@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { app } from "../services/firebase";
+import Header from "../components/Header";
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import Box from '@mui/material/Box';
@@ -93,7 +94,7 @@ const Project = (props) => {
     
     const loaded = () => {
         return (
-            <>
+            <main>
                 <h2>{project.title}</h2>
                 {
                     project.songs.length ? 
@@ -131,12 +132,13 @@ const Project = (props) => {
                     <TextField type="text" name="title" onChange={handleChange} value={formState.title}/>
                     <TextField type="submit" value="add song" />
                 </form>
-            </>
+            </main>
         )
     }
 
     return (
         <main>
+            <Header user={props.user}/>
             <h1>Project</h1>
             {project ? loaded() : loading()}
         </main>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { app } from "../services/firebase";
+import Header from '../components/Header';
 
 const Dashboard = (props) => {
     
@@ -82,6 +83,7 @@ const Dashboard = (props) => {
     return (
         <>
         <main>
+        <Header user={props.user}/>
             <h1>Dashboard</h1>
             <section>
                 <form onSubmit={handleSubmit}>
@@ -107,7 +109,7 @@ const Dashboard = (props) => {
                             </form>    
                             </> 
                             :
-                            <img src={pr.img} alt={pr.title} />
+                            <img style={{width: 350}}src={pr.img} alt={pr.title} />
                              
                             }
                                 <Link to={`/project/${pr._id}`} key={idx}>
