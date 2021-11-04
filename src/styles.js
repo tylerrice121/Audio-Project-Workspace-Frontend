@@ -109,7 +109,7 @@ $medium: 1200px;
 `;
 
 export const StyledLogin = styled.div `
-    display: flex;
+    display: -webkit-flex;
     height: 100vh;
     align-items: center;
     justify-content: center;
@@ -119,7 +119,7 @@ export const StyledLogin = styled.div `
     .circle{
         padding: 20px;
         background: rgba(254,200,18,0.9);
-        display: flex;
+        display: -webkit-flex;
         flex-direction: column;
         justify-content: space-evenly;
         width: 500px;
@@ -127,8 +127,8 @@ export const StyledLogin = styled.div `
         border-radius: 50%;
         @media only screen and (max-width: 600px),
         only screen and (max-height: 600px) {
-            width: 360px;
-            height: 360px;
+        width: 360px;
+        height: 360px;
         }
         .title{
             height: 100px;
@@ -137,6 +137,7 @@ export const StyledLogin = styled.div `
                 font-family: 'Bowlby One SC', cursive;
                 font-size: 60px;
                 margin: 0;
+                padding: 0;
                 @media only screen and (max-width: 600px),
                 only screen and (max-height: 600px) {
                 font-size: 50px;
@@ -144,6 +145,7 @@ export const StyledLogin = styled.div `
             }
             h2{
                 color: #292929;
+                margin: 0;
                 @media only screen and (max-width: 600px),
                 only screen and (max-height: 600px) {
                 font-size: 20px;
@@ -152,14 +154,14 @@ export const StyledLogin = styled.div `
         }
         .homeButtons{
             margin: 0;
-            display: flex;
+            display: -webkit-flex;
             flex-direction: column;
             justify-content: flex-start;
             align-content: center;
             height: 300px;
             @media only screen and (max-width: 600px),
             only screen and (max-height: 600px) {
-                height: 250px;
+                height: 300px;
             }
             .google{
                 border: none;
@@ -175,7 +177,7 @@ export const StyledLogin = styled.div `
             .login{
                 height: 220px;
                 align-self: center;
-                display: flex;
+                display: -webkit-flex;
                 flex-direction: column;
                 align-content: center;
                 justify-content: space-evenly;
@@ -183,13 +185,13 @@ export const StyledLogin = styled.div `
                 @media only screen and (max-width: 600px),
                 only screen and (max-height: 600px) {
                 width: 250px;
-                height: 200px;
+                height: 210px;
                 }
                 .form{
-                    height: 500px;
-                    display: flex;
+                    height: 180px;
+                    display: -webkit-flex;
                     flex-direction: column;
-                    justify-content: space-evenly;
+                    justify-content: center;
                 }
                 .button {
                 margin-top: 20px;
@@ -209,10 +211,9 @@ export const StyledLogin = styled.div `
                 border-radius: 6px;
                 @media only screen and (max-width: 600px),
                 only screen and (max-height: 600px) {
-                    display: none;
                 width: 110px;
                 height: 35px;
-                margin: 0;
+                margin-top: 10px;
                 }
                 }
 
