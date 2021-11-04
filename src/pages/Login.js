@@ -45,7 +45,7 @@ const handleSubmit = (event) => {
                 <div className="homeButtons">
                     <div className="login">
                         <form onSubmit={handleSubmit} className="form">
-                            <TextField id="standard-basic" label="email" variant="standard" value={logIn.email} type="text" name="email" onChange={handleChange}/>
+                            <TextField className="email"id="standard-basic" label="email" variant="standard" value={logIn.email} type="text" name="email" onChange={handleChange}/>
                             <TextField id="standard-basic" label="password" variant="standard" value={logIn.password} type="password" name="password" onChange={handleChange}/>     
                             <input className="button" type="submit" value="Login"/>
                         </form>

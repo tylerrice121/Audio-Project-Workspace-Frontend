@@ -118,7 +118,6 @@ export const StyledLogin = styled.div `
     background-size: cover;
     background-repeat: no-repeat;
     .circle{
-        padding: 20px;
         background: rgba(254,200,18,0.9);
         display: -webkit-flex;
         flex-direction: column;
@@ -137,11 +136,12 @@ export const StyledLogin = styled.div `
                 color: #292929;
                 font-family: 'Bowlby One SC', cursive;
                 font-size: 60px;
-                margin: 0;
+                margin-bottom: 0;
+                /* margin: 0; */
                 padding: 0;
                 @media only screen and (max-width: 600px),
                 only screen and (max-height: 600px) {
-                font-size: 50px;
+                font-size: 40px;
                 }
             }
             h2{
@@ -196,158 +196,7 @@ export const StyledLogin = styled.div `
                 }
                 .button {
                 margin-top: 20px;
-                margin-bottom: 20px;
-                display: flex;
-                background-color: transparent;
-                justify-content: center;
-                text-align: center;
-                font-weight: 600;
-                justify-self: center;
-                align-self: center;
-                width: 120px;
-                height: 40px;
-                color: #585858;
-                text-decoration: none;
-                border: 1px solid #585858;
-                border-radius: 6px;
-                @media only screen and (max-width: 600px),
-                only screen and (max-height: 600px) {
-                width: 110px;
-                height: 35px;
-                margin-top: 10px;
-                }
-                }
-
-            }
-            .signup{
-                margin-top: 10px;
-                display: flex;
-                flex-direction: column;
-                height: 20px;
-                @media only screen and (max-width: 600px),
-                only screen and (max-height: 600px) {
-                    margin-top: 5px;
-                }
-                p{
-                    margin: 0;
-                    font-size: 12px;
-                }
-                }
-                a {
-                    margin: 0;
-                    display: flex;
-                    justify-content: center;
-                    text-align: center;
-                    font-weight: 600;
-                    justify-self: center;
-                    align-self: center;
-                    width: 140px;
-                    height: 45px;
-                    color: #585858;
-                    @media only screen and (max-width: 600px),
-                    only screen and (max-height: 600px) {
-                    width: 130px;
-                    height: 35px;
-                    }
-                    h3{
-                        font-size: 15px;
-                        font-weight: 500;
-                        align-self: center;
-                    }
-                }
-            }
-        }
-    
-`;
-
-export const StyledSignup = styled.div `
-    display: -webkit-flex;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-    background-image: url("./images/john-matychuk-gUK3lA3K7Yo-unsplash.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    .circle{
-        padding: 20px;
-        background: rgba(254,200,18,0.9);
-        display: -webkit-flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        width: 500px;
-        height: 500px;
-        border-radius: 50%;
-        @media only screen and (max-width: 600px),
-        only screen and (max-height: 600px) {
-        width: 360px;
-        height: 360px;
-        }
-        .title{
-            height: 100px;
-            h1{
-                color: #292929;
-                font-family: 'Bowlby One SC', cursive;
-                font-size: 60px;
-                margin: 0;
-                padding: 0;
-                @media only screen and (max-width: 600px),
-                only screen and (max-height: 600px) {
-                font-size: 50px;
-                }
-            }
-            h2{
-                color: #292929;
-                margin: 0;
-                @media only screen and (max-width: 600px),
-                only screen and (max-height: 600px) {
-                font-size: 20px;
-                }
-            }
-        }
-        .homeButtons{
-            margin: 0;
-            display: -webkit-flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-content: center;
-            height: 300px;
-            @media only screen and (max-width: 600px),
-            only screen and (max-height: 600px) {
-                height: 300px;
-            }
-            .google{
-                border: none;
-                background-color: transparent;
-                text-decoration: underline;
-                font-weight: 600;
-                font-size: 13px;
-                color: #585858;
-                &:hover{
-                    cursor: pointer;
-                }
-            }
-            .login{
-                height: 220px;
-                align-self: center;
-                display: -webkit-flex;
-                flex-direction: column;
-                align-content: center;
-                justify-content: space-evenly;
-                width: 300px;
-                @media only screen and (max-width: 600px),
-                only screen and (max-height: 600px) {
-                width: 250px;
-                height: 210px;
-                }
-                .form{
-                    height: 180px;
-                    display: -webkit-flex;
-                    flex-direction: column;
-                    justify-content: center;
-                }
-                .button {
-                margin-top: 20px;
-                margin-bottom: 20px;
+                /* margin-bottom: 20px; */
                 display: flex;
                 background-color: transparent;
                 justify-content: center;
@@ -382,6 +231,157 @@ export const StyledSignup = styled.div `
                 p{
                     margin: 0;
                     font-size: 12px;
+                    @media only screen and (max-width: 600px),
+                    only screen and (max-height: 600px) {
+                    display: none;
+                }      
+                }
+                }
+                a {
+                    display: flex;
+                    justify-content: center;
+                    text-align: center;
+                    font-weight: 600;
+                    justify-self: center;
+                    align-self: center;
+                    width: 140px;
+                    height: 45px;
+                    color: #585858;
+                    @media only screen and (max-width: 600px),
+                    only screen and (max-height: 600px) {
+                    width: 130px;
+                    height: 35px;
+                    margin-bottom: 20px;
+                    }
+                    h3{
+                        font-size: 12px;
+                        font-weight: 500;
+                        align-self: center;
+                        margin-bottom: 30px;
+                    }
+                }
+            }
+        }
+    
+`;
+
+export const StyledSignup = styled.div `
+    display: -webkit-flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-image: url("./images/john-matychuk-gUK3lA3K7Yo-unsplash.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    .circle{
+        /* padding: 20px; */
+        background: rgba(254,200,18,0.9);
+        display: -webkit-flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        @media only screen and (max-width: 600px),
+        only screen and (max-height: 600px) {
+        width: 360px;
+        height: 360px;
+        }
+        .title{
+            height: 100px;
+            h1{
+                color: #292929;
+                font-family: 'Bowlby One SC', cursive;
+                font-size: 60px;
+                /* margin: 0; */
+                margin-bottom: 0;
+                padding: 0;
+                @media only screen and (max-width: 600px),
+                only screen and (max-height: 600px) {
+                font-size: 40px;
+                }
+            }
+            h2{
+                color: #292929;
+                margin: 0;
+                @media only screen and (max-width: 600px),
+                only screen and (max-height: 600px) {
+                font-size: 20px;
+                }
+            }
+        }
+        .homeButtons{
+            margin: 0;
+            display: -webkit-flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-content: center;
+            height: 300px;
+            @media only screen and (max-width: 600px),
+            only screen and (max-height: 600px) {
+                height: 300px;
+            }
+            .login{
+                height: 210px;
+                align-self: center;
+                display: -webkit-flex;
+                flex-direction: column;
+                align-content: center;
+                justify-content: space-evenly;
+                width: 300px;
+                @media only screen and (max-width: 600px),
+                only screen and (max-height: 600px) {
+                width: 250px;
+                height: 210px;
+                }
+                .form{
+                    height: 170px;
+                    display: -webkit-flex;
+                    flex-direction: column;
+                    justify-content: center;
+                }
+                .button {
+                margin-top: 20px;
+                /* margin-bottom: 20px; */
+                display: flex;
+                background-color: transparent;
+                justify-content: center;
+                text-align: center;
+                font-weight: 600;
+                justify-self: center;
+                align-self: center;
+                width: 120px;
+                height: 40px;
+                color: #585858;
+                text-decoration: none;
+                border: 1px solid #585858;
+                border-radius: 6px;
+                @media only screen and (max-width: 600px),
+                only screen and (max-height: 600px) {
+                width: 110px;
+                height: 35px;
+                margin-top: 10px;
+                }
+                }
+
+            }
+            .signup{
+                margin-top: 10px;
+                display: flex;
+                flex-direction: column;
+                height: 20px;
+                @media only screen and (max-width: 600px),
+                only screen and (max-height: 600px) {
+                    margin-top: 0px;
+                }
+                p{
+                    /* margin: 0; */
+                    margin-top: 0;
+                    font-size: 12px;
+                    @media only screen and (max-width: 600px),
+                    only screen and (max-height: 600px) {
+                    display: none;
+                }
                 }
                 a {
                     margin: 0;
@@ -400,9 +400,10 @@ export const StyledSignup = styled.div `
                     height: 35px;
                     }
                     h3{
-                        font-size: 15px;
+                        font-size: 12px;
                         font-weight: 500;
                         align-self: center;
+                        margin-bottom: 50px;
                     }
                 }
             }
