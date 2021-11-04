@@ -42,7 +42,7 @@ $medium: 1200px;
     background-size: cover;
     background-repeat: no-repeat;
     .circle{
-        padding: 20px;
+        /* padding: 20px; */
         background: rgba(254,200,18,0.9);
         display: flex;
         flex-direction: column;
@@ -339,6 +339,7 @@ export const StyledSignup = styled.div `
                     display: -webkit-flex;
                     flex-direction: column;
                     justify-content: center;
+                    padding-bottom: 22px;
                 }
                 .button {
                 margin-top: 20px;
