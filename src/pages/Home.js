@@ -1,9 +1,10 @@
 import {StyledHome} from '../styles.js'
 import { Link } from 'react-router-dom';
+import Paper from '@mui/material/Paper';
 const Home = (props) => {
     return (
         <StyledHome>
-            <div className="circle">
+            <Paper className="circle">         
                 <div className="title">
                     <h1>APW</h1>
                     <h2>Audio Project Workspace</h2>
@@ -16,7 +17,7 @@ const Home = (props) => {
                         <h3>Signup</h3>
                     </Link>
                 </div>
-            </div>
+            </Paper>
         </StyledHome>  
     );
 };
