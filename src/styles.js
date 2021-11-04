@@ -219,20 +219,20 @@ export const StyledLogin = styled.div `
 
             }
             .signup{
-                margin-top: 30px;
+                margin-top: 10px;
                 display: flex;
                 flex-direction: column;
                 height: 20px;
                 @media only screen and (max-width: 600px),
                 only screen and (max-height: 600px) {
-                    margin-top: 10px;
+                    margin-top: 5px;
                 }
                 p{
                     margin: 0;
                     font-size: 12px;
-                    @media only screen and (max-width: 600px),
+                    /* @media only screen and (max-width: 600px),
                     only screen and (max-height: 600px) {
-                    display: none;
+                    display: none; */
                 }
                 }
                 a {
