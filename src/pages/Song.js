@@ -16,6 +16,7 @@ const Song = (props) => {
 
     const [formState, setFormState] = useState({
         item: "",
+        uniqueId: ""
     });
 
     const [items, setItems] = useState(song.list)
@@ -37,15 +38,16 @@ const Song = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const uniqueId = Math.floor(Math.random() * Math.floor(Math.random() * Date.now()))
-        const newList = {item: formState.item, _id: uniqueId, completed: false}
+        const newList = {item: formState.item, uniqueId: uniqueId, completed: false}
         handleAddList(newList)
         setFormState({
             item: "",
+            uniqueId: ""
         });
     };
 
     const handleRemoveList = (id) => {
-        const newItemList = items.filter(item => item._id !== id)
+        const newItemList = items.filter(item => item.uniqueId !== id)
         setItems(newItemList)
         song.list = newItemList
         props.updateEntireProject(project, props.match.params.id)
@@ -53,7 +55,7 @@ const Song = (props) => {
 
     const handleCheck = (id) => {
         const newItemList = items.map(item => {
-            if (item._id === id)
+            if (item.uniqueId === id)
             return {...item,completed:!item.completed}
             return item;
         })
@@ -83,25 +85,25 @@ const Song = (props) => {
             {
             items.length ? 
             <ul key={song.title} className="list">
-                {items.map(item => ( 
-                <ListItem key={item._id} className="listItem">
+                {items.map((item) =>  
+                <ListItem key={item.uniqueId} className="listItem">
                     <div className="checkText">
                         <Checkbox
                             type="checkbox" 
                             name="completed" 
                             checked={item.completed}
-                            onChange={() => handleCheck(item._id)}
+                            onChange={() => handleCheck(item.uniqueId)}
                         />
                         <p>{item.item}</p>
                     </div>
                     <p  
                         className="x"
                         style={{fontWeight: 600, cursor: "pointer"}}
-                        onClick={() => handleRemoveList(item._id)}
+                        onClick={() => handleRemoveList(item.uniqueId)}
                     >X
                     </p>           
                 </ListItem>         
-                )) }
+                )}
             </ul>          
             :
             <h2 className="nolist">No List Items Yet</h2>
