@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { app } from "../services/firebase";
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import { StyledDash } from "../styles";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
@@ -101,7 +102,7 @@ const Dashboard = (props) => {
                             value={formState.title} 
                             name="title" 
                             type="text" 
-                            />
+                        />
                         <Button className="addButton" variant="outlined" type="submit">Add</Button>
                     </form> 
                 </div>

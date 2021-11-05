@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { app } from "../services/firebase";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Paper from '@mui/material/Paper';
 import { TextField} from "@mui/material";
-import '@fontsource/roboto/400.css';
+import { StyledProject } from "../styles";
+
 
 const Project = (props) => {
 
@@ -74,6 +74,12 @@ const Project = (props) => {
         console.log(project.songs)
         props.updateEntireProject(project, props.match.params.id)
     }
+
+    const hiddenFileInput = useRef(null);
+
+    const handleClick = event => {
+        hiddenFileInput.current.click();
+    };
     
     const loadingFile = (song) => {
         if(fileUrl.audio === null || fileUrl.audio === ''){
@@ -81,10 +87,10 @@ const Project = (props) => {
         } else if (song._id !== fileUrl.id){
             return 
         } else {
-            return  <div>
-                        <h1>loaded!</h1>
-                        <input id={song._id} type="submit" value="Add"/>
-                    </div>
+            return  <>
+                        <Button id={song._id} className="uploadSongButton" variant="outlined" type="submit">add</Button>
+                        {/* <input id={song._id} type="submit" value="Add"/> */}
+                    </>
         }
     }
   
@@ -94,54 +100,66 @@ const Project = (props) => {
     
     const loaded = () => {
         return (
-            <main>
-                <h2>{project.title}</h2>
+            
+            <StyledProject>
+            <Header user={props.user}/>
+                <div className="top">
+                    <h2>{project.title}</h2>
+                    <form onSubmit={handleSubmit} className="newsong">
+                        <TextField 
+                            id="standard-basic" 
+                            label="New Song" 
+                            variant="standard"
+                            onChange={handleChange} 
+                            value={formState.title} 
+                            name="title" 
+                            type="text" 
+                        />
+                        <Button variant="outlined" type="submit">ADD</Button>
+                    </form>
+                </div>
                 {
                     project.songs.length ? 
-                    <>
-                        <br />
-                            {project.songs.map((song, index) => 
-                            <Box key={song._id}>
-                                <Paper>
-                                    <Link to={`/project/${id}/songs/${index}`}>
-                                        <p>{song.title}</p>
-                                    </Link>
-                                    {song.audio === "" || song.audio === null ?
-                                    <form id={song._id} onSubmit={addSong}>
-                                        <TextField id={song._id} type="file" onChange={handleFile}/>
-
-                                        {loadingFile(song)}
-                                    </form>                          
-                                    :
-                                    <>
-                                    <AudioPlayer
-                                    src={song.audio}
-                                    />
-                                    </>                          
-                                    }
-                                    <Button type="submit" onClick={()=> handleDelete(song._id)}>DELETE SONG</Button>
-                                </Paper>
-                            </Box>
-                            )}
-                        <br />
-                    </>
+                <div className="main">
+                    {project.songs.map((song, index) => 
+                    <div key={song._id} className="songs">
+                        <Link to={`/project/${id}/songs/${index}`} className="songTitle">
+                            <h3>{song.title}</h3>
+                        </Link>
+                        {song.audio === "" || song.audio === null ?
+                        <form id={song._id} onSubmit={addSong}>
+                            <Button className="uploadSongButton" variant="outlined" type="button" onClick={handleClick}>Upload mp3</Button>
+                            <input className="uploadSong" ref={hiddenFileInput} id={song._id} type="file" onChange={handleFile}/>
+                            {loadingFile(song)}
+                        </form>                          
+                        :
+                        <>
+                            <AudioPlayer
+                                src={song.audio}
+                            />
+                        </>                          
+                        }
+                        <div className="buttonsBottom">
+                            <Link to={`/project/${id}/songs/${index}`}>
+                                <Button className="buttonBelow" variant="outlined" type="button">todo list</Button>
+                            </Link>
+                            <Button className="buttonBelow" variant="outlined" type="submit" onClick={()=> handleDelete(song._id)}>DELETE SONG</Button>
+                        </div>
+                    </div>
+                    ).reverse()}
+                </div>
                     :
-                    <p>No Songs Yet</p>
+                <h1 className="nosongs">No Songs Yet</h1>
                 } 
-                <form onSubmit={handleSubmit}>
-                    <TextField type="text" name="title" onChange={handleChange} value={formState.title}/>
-                    <TextField type="submit" value="add song" />
-                </form>
-            </main>
+            </StyledProject>
+            
         )
     }
 
     return (
-        <main>
-            <Header user={props.user}/>
-            <h1>Project</h1>
+        <>
             {project ? loaded() : loading()}
-        </main>
+        </>
     );
 };
 

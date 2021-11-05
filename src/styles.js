@@ -5,7 +5,7 @@ export const StyledHeader = styled.header `
     display: flex;
     justify-content: space-between;
     padding-left: 3rem;
-    background-color: black;
+    background-color: #1b1b1b;
     color: white;
     align-items: center;
     width: 100%;
@@ -417,6 +417,7 @@ export const StyledDash = styled.div `
     flex-direction: column;
     height: 100%;
     width: 100%;
+    flex-grow: 1;
     align-items: center;
     justify-content: center;
     .top{
@@ -515,4 +516,95 @@ export const StyledDash = styled.div `
         }
     }
 
+`;
+
+export const StyledProject = styled.div `
+    display: -webkit-flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: flex-start;
+    .nosongs{
+        margin-top: 200px;
+        height: 45vh;
+        color: #292929;
+    }
+    .top{
+        width: 350px;
+        h2{
+            color: #292929;
+        }
+        .newsong{
+            display: flex;
+            justify-content: space-evenly;
+            button{
+                color: #585858;
+                border-color: #585858;
+                align-self: flex-end;
+                height: 30px;
+                width: 10px;
+            }
+        }
+    }
+    .main{
+        display: flex;
+        margin-top: 20px;
+        align-content: center;
+        flex-direction: column;
+        .songs{
+            margin-top: 20px;
+            width: 800px;
+            height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            /* border: 1px solid black; */
+            .songTitle{
+                text-decoration: none;
+                margin-left: 10px;
+                color: #292929
+            }
+            form{
+                display: flex;
+                justify-content: center;
+                align-content: center;
+                height: 88px;
+                box-shadow: 2px 1px 3px #d3d3d3;
+                .uploadSong{
+                    display: none;
+                }
+                .uploadSongButton{
+                    color: #585858;
+                    border-color: #585858;
+                    align-self: center;
+                    height: 40px;
+                    width: 130px;
+                    justify-self: center;
+                    margin-left: 20px;
+                }
+            }
+            .buttonsBottom{
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                a{
+                    text-decoration: none;
+                }
+                .buttonBelow{
+                    color: #585858;
+                    border-color: #585858;
+                    border: none;
+                    height: 40px;
+                    width: 130px;
+                    margin-top: 20px;
+                    margin-bottom: 10px;
+                    margin-right: 20px;
+                    margin-left: 20px;
+                    font-size: 12px;
+                }
+            }
+        }
+    }
 `;
