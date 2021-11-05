@@ -467,6 +467,11 @@ export const StyledDash = styled.div `
             margin-bottom: 20px;
             margin-left: 20px;
             margin-right: 20px;
+            .imgdiv{
+                overflow: hidden;
+                width: 350px;
+                height: 350px;
+            }
             .upload{
                 border: 1px solid gray;
                 display: flex;

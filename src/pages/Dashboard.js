@@ -120,7 +120,12 @@ const Dashboard = (props) => {
                             </form>    
                         </div> 
                         :
-                        <img style={{width: 350, height: 350}}src={pr.img} alt={pr.title} />
+                        <section className="imgdiv">
+                            <img 
+                                style={{height: 350}}
+                                src={pr.img} alt={pr.title} 
+                            />
+                        </section>
                         }
                         <h3>{pr.title}</h3>
                         <div className="bottom">
