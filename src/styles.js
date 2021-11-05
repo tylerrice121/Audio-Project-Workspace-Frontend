@@ -593,6 +593,7 @@ export const StyledProject = styled.div `
                     width: 130px;
                     justify-self: center;
                     margin-left: 20px;
+                    margin-right: 20px;
                 }
             }
             .buttonsBottom{
