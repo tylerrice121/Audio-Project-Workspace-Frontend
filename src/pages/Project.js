@@ -136,6 +136,8 @@ const Project = (props) => {
                         <>
                             <AudioPlayer
                                 src={song.audio}
+                                customVolumeControls={[]}
+                                customAdditionalControls={[]}
                             />
                         </>                          
                         }

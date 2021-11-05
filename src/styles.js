@@ -560,10 +560,12 @@ export const StyledProject = styled.div `
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            /* border: 1px solid black; */
+            @media only screen and (max-width: 900px){
+            width: 350px;
+            }
+        
             .songTitle{
                 text-decoration: none;
-                margin-left: 10px;
                 color: #292929
             }
             form{
