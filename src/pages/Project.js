@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { app } from "../services/firebase";
 import Header from "../components/Header";
-import Footer from "../components/Footer";
+// import Footer from "../components/Footer";
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import Button from '@mui/material/Button';
@@ -71,7 +71,6 @@ const Project = (props) => {
     const handleDelete = (id) => {
         const newSongList = project.songs.filter(song => song._id !== id)
         project.songs = newSongList
-        console.log(project.songs)
         props.updateEntireProject(project, props.match.params.id)
     }
 
@@ -89,7 +88,6 @@ const Project = (props) => {
         } else {
             return  <>
                         <Button id={song._id} className="uploadSongButton" variant="outlined" type="submit">add</Button>
-                        {/* <input id={song._id} type="submit" value="Add"/> */}
                     </>
         }
     }
@@ -100,7 +98,7 @@ const Project = (props) => {
     
     const loaded = () => {
         return (
-            
+            <>
             <StyledProject>
             <Header user={props.user}/>
                 <div className="top">
@@ -154,7 +152,7 @@ const Project = (props) => {
                 <h1 className="nosongs">No Songs Yet</h1>
                 } 
             </StyledProject>
-            
+        </>
         )
     }
 

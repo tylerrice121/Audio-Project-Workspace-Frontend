@@ -9,6 +9,11 @@ export const StyledHeader = styled.header `
     color: white;
     align-items: center;
     width: 100%;
+    .logo{
+        /* color: #292929; */
+        font-family: 'Bowlby One SC', cursive;
+        font-weight: 200;
+    }
     nav {
         display: flex;
         align-items: center;
@@ -415,11 +420,14 @@ export const StyledSignup = styled.div `
 export const StyledDash = styled.div `
     display: -webkit-flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 100vh;
     width: 100%;
     flex-grow: 1;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    .noprojects{
+        margin-top: 200px;
+    }
     .top{
         display: flex;
         flex-direction: column;
@@ -521,7 +529,7 @@ export const StyledDash = styled.div `
 export const StyledProject = styled.div `
     display: -webkit-flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 100vh;
     width: 100%;
     flex-grow: 1;
     align-items: center;
@@ -606,6 +614,59 @@ export const StyledProject = styled.div `
                     margin-left: 20px;
                     font-size: 12px;
                 }
+            }
+        }
+    }
+`;
+
+export const StyledSong = styled.div `
+    display: -webkit-flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: flex-start;
+    .nolist{
+        color: #292929;
+        margin-top: 200px;
+    }
+    .top{
+        width: 350px;
+        h2{
+            color: #292929;
+        }
+        .newitem{
+            display: flex;
+            justify-content: space-evenly;
+            button{
+                color: #585858;
+                border-color: #585858;
+                align-self: flex-end;
+                height: 30px;
+                width: 10px;
+            }
+        }
+    }
+    .list{
+        margin-top: 40px;
+        padding: 0;
+        width: 700px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        @media only screen and (max-width: 900px){
+            width: 350px;
+        }
+        .listItem{
+            border-bottom: 1px solid #585858;
+            display: flex;
+            justify-content: space-between;
+            justify-self: center;
+            .checkText{
+                display: flex;
+                width: 600px;
             }
         }
     }

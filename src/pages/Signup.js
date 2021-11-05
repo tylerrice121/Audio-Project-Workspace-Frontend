@@ -18,9 +18,6 @@ const Signup = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         auth.createUserWithEmailAndPassword(signUp.email, signUp.password)
-        .then(cred => {
-            console.log(cred);
-        });
     };
 
     return (

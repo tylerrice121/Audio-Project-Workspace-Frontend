@@ -6,7 +6,7 @@ import {StyledHeader} from '../styles.js'
 const Header = (props) => {
     return (
         <StyledHeader>
-            <h1>APW</h1>
+            <h1 className="logo">APW</h1>
             <nav>
                 <ul>
                     {

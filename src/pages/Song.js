@@ -1,5 +1,15 @@
 import { useState } from "react";
 import Header from "../components/Header";
+import { StyledSong } from "../styles";
+import { Button } from "@mui/material";
+import { TextField } from "@mui/material";
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Checkbox from '@mui/material/Checkbox';
+
 
 const Song = (props) => {
     const id = props.match.params.id;
@@ -17,7 +27,6 @@ const Song = (props) => {
     const handleAddList = (newList) => {
         const newListItem = [...items, newList]
         setItems(newListItem)
-        console.log(newListItem)
         song.list = newListItem
         props.updateEntireProject(project, props.match.params.id)
     }
@@ -58,41 +67,50 @@ const Song = (props) => {
     }
 
     return (
-        <main>
+        <StyledSong>
         <Header user={props.user}/>    
-            <h1>Song</h1>
-            <h2>{song.title}</h2>
+            <div className="top">
+                <h2>{song.title}</h2>
+                <form onSubmit={handleSubmit} className="newitem">
+                    <TextField 
+                            id="standard-basic" 
+                            label="New Todo" 
+                            variant="standard"
+                            onChange={handleChange} 
+                            value={formState.item}
+                            name="item"
+                            type="text" 
+                    />
+                    <Button variant="outlined" type="submit">ADD</Button>
+                </form>      
+            </div>
             {
-                items.length ? 
-                    <ul key={song.title}>
-                        {items.map(item => ( 
-                            <div key={item._id}>
-                                <input
-                                    type="checkbox" 
-                                    name="completed" 
-                                    checked={item.completed}
-                                    onChange={() => handleCheck(item._id)}
-                                />
-                                <div>
-                                    <p>{item.item}</p>
-                                    <p 
-                                    style={{fontWeight: 600, cursor: "pointer"}}
-                                    onClick={() => handleRemoveList(item._id)}
-                                    >
-                                    X
-                                    </p>
-                                </div>              
-                            </div>      
-                        )) }
-                    </ul>          
-                :
-                <p>No List Yet</p>
+            items.length ? 
+            <ul key={song.title} className="list">
+                {items.map(item => ( 
+                <ListItem key={item._id} className="listItem">
+                    <div className="checkText">
+                        <Checkbox
+                            type="checkbox" 
+                            name="completed" 
+                            checked={item.completed}
+                            onChange={() => handleCheck(item._id)}
+                        />
+                        <p>{item.item}</p>
+                    </div>
+                    <p  
+                        className="x"
+                        style={{fontWeight: 600, cursor: "pointer"}}
+                        onClick={() => handleRemoveList(item._id)}
+                    >X
+                    </p>           
+                </ListItem>         
+                )) }
+            </ul>          
+            :
+            <h2 className="nolist">No List Items Yet</h2>
             }
-            <form onSubmit={handleSubmit}>
-                <input type="text" name="item" onChange={handleChange} value={formState.item}/>
-                <input type="submit" value="Add Item to List"/>
-            </form>
-        </main>
+        </StyledSong>
     );
 };
 
