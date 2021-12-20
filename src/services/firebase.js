@@ -1,10 +1,10 @@
 import firebase from 'firebase/app';
-
 import 'firebase/auth';
 import 'firebase/storage'
+require('dotenv').config()
 
 const firebaseConfig = {
-    apiKey: "AIzaSyD_bXfKCY9XPleXjcF8CrxXVbPFHE8ycVI",
+    apiKey: `${process.env.REACT_APP_API_KEY}`,
     authDomain: "apw-auth.firebaseapp.com",
     projectId: "apw-auth",
     storageBucket: "apw-auth.appspot.com",

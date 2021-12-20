@@ -47,7 +47,7 @@ const Dashboard = (props) => {
         })
     }
 
-
+    // TODO add loading bar
     const loadingFile = (pr) => {
         if(fileState.img === null || fileState.img === '') {
             return 
