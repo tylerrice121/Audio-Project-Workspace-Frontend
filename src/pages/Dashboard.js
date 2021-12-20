@@ -40,7 +40,6 @@ const Dashboard = (props) => {
         const project = projects.filter(project => event.target.id === project._id)
         project[0].img = fileState.img
         props.updateEntireProject(project[0], project[0]._id)
-        console.log(project[0]._id)
         setFileState({
             img: "",
             id: ""
