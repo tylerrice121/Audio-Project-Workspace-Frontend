@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import {Switch, Route, Redirect} from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
@@ -7,7 +7,7 @@ import Login from './pages/Login';
 import Project from './pages/Project';
 import Signup from './pages/Signup';
 import Song from './pages/Song';
-import {auth} from './services/firebase';
+import { auth } from './services/firebase';
 import './App.css';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -24,12 +24,12 @@ function App() {
 
   // const API_URL = 'http://localhost:3002/api/projects'
 
-  const API_URL = 'https://apw-api-2344.herokuapp.com/api/projects'
+  const API_URL = 'https://apw-api-02-aa0157239f31.herokuapp.com/api/projects'
 
   // projects helper functions
   const getProjects = async () => {
-    
-    if(!user) return;
+
+    if (!user) return;
 
     const token = await user.getIdToken();
     const response = await fetch(API_URL, {
@@ -45,12 +45,12 @@ function App() {
 
 
   const createProject = async (p) => {
-    if(!user) return;
-    const data = {...p, managedBy: user.uid}
+    if (!user) return;
+    const data = { ...p, managedBy: user.uid }
     const token = await user.getIdToken();
     await fetch(API_URL, {
-      method: 'POST', 
-      headers: {'Content-type': 'Application/json', 'Authorization': 'Bearer ' + token},
+      method: 'POST',
+      headers: { 'Content-type': 'Application/json', 'Authorization': 'Bearer ' + token },
       body: JSON.stringify(data)
     })
     getProjects()
@@ -59,12 +59,12 @@ function App() {
 
 
   const createSong = async (song, id) => {
-    if(!user) return;
-    const data = {...song, createdBy: user.uid}
+    if (!user) return;
+    const data = { ...song, createdBy: user.uid }
     const token = await user.getIdToken();
     await fetch(`${API_URL}/${id}/songs`, {
       method: 'POST',
-      headers: {'Content-type': 'Application/json', 'Authorization': 'Bearer ' + token},
+      headers: { 'Content-type': 'Application/json', 'Authorization': 'Bearer ' + token },
       body: JSON.stringify(data)
     })
     getProjects();
@@ -72,41 +72,41 @@ function App() {
 
   const updateEntireProject = async (project, id) => {
     if (!user) return;
-    const data = {...project}
+    const data = { ...project }
     const token = await user.getIdToken();
     await fetch(`${API_URL}/${id}`, {
       method: 'PUT',
-      headers: {'Content-type': 'Application/json', 'Authorization': 'Bearer ' + token},
+      headers: { 'Content-type': 'Application/json', 'Authorization': 'Bearer ' + token },
       body: JSON.stringify(data)
     })
     getProjects()
-  }   
-  
+  }
+
 
   const updateProject = async (project, id, songId) => {
-    if(!user) return;
-    const data = {...project};
+    if (!user) return;
+    const data = { ...project };
     const token = await user.getIdToken();
     await fetch(`${API_URL}/${id}/songs/${songId}`, {
       method: 'PUT',
-      headers: {'Content-type': 'Application/json', 'Authorization': 'Bearer ' + token},
+      headers: { 'Content-type': 'Application/json', 'Authorization': 'Bearer ' + token },
       body: JSON.stringify(data)
     })
     getProjects()
   }
 
   const deleteProject = async (project, id) => {
-    if(!user) return;
-    const data = {...project}
+    if (!user) return;
+    const data = { ...project }
     const token = await user.getIdToken();
     await fetch(`${API_URL}/${id}`, {
       method: 'DELETE',
-      headers: {'Content-type': 'Application/json', 'Authorization': 'Bearer ' + token},
+      headers: { 'Content-type': 'Application/json', 'Authorization': 'Bearer ' + token },
       body: JSON.stringify(data)
     })
     getProjects()
-  }   
-  
+  }
+
 
   useEffect(() => {
     fetchData.current = getProjects
@@ -116,13 +116,13 @@ function App() {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setUser(user);
 
-      if(user) {
+      if (user) {
         fetchData.current();
       } else {
         setProjects([])
       }
     });
-    
+
 
     return () => unsubscribe();
   }, [user]);
@@ -136,21 +136,21 @@ function App() {
         </Route>
         <Route path='/login' render={() => (
           user ? <Redirect to='/dashboard' /> : <Login />
-          )} />
+        )} />
         <Route path='/signup' render={() => (
           user ? <Redirect to='/dashboard' /> : <Signup />
-          )} />
+        )} />
         <Route path='/dashboard' render={() => (
           user ? (
-            <Dashboard 
-          projects={projects} 
-          updateEntireProject={updateEntireProject}
-          createProject={createProject}
-          user={user}
-          deleteProject={deleteProject}
-          />) : <Redirect to='/login'/>
+            <Dashboard
+              projects={projects}
+              updateEntireProject={updateEntireProject}
+              createProject={createProject}
+              user={user}
+              deleteProject={deleteProject}
+            />) : <Redirect to='/login' />
         )} />
-          <Route 
+        <Route
           exact path='/project/:id/songs/:songid'
           render={(rp) => (
             user ? (
@@ -163,24 +163,24 @@ function App() {
               />
             ) : <Redirect to='/login' />
           )}
-          />  
-        <Route 
+        />
+        <Route
           exact path='/project/:id'
           render={(rp) => (
             user ? (
-              <Project 
+              <Project
                 {...rp}
                 user={user}
                 projects={projects}
                 createSong={createSong}
                 updateEntireProject={updateEntireProject}
               />
-            ) : <Redirect to='/login'/>
+            ) : <Redirect to='/login' />
 
           )}
         />
       </Switch>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
